@@ -1,7 +1,6 @@
 package com.root.cognition.system.config;
 
 
-import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.root.cognition.system.service.UserService;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -89,15 +88,6 @@ public class ShiroConfig {
         return new LifecycleBeanPostProcessor();
     }
 
-    /**
-     * 页面 ShiroDialect 注入 为了在thymeleaf里使用shiro的标签的bean
-     *
-     * @return
-     */
-    @Bean
-    public ShiroDialect shiroDialect() {
-        return new ShiroDialect();
-    }
 
 }
 
