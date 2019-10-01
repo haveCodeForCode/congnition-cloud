@@ -9,11 +9,23 @@ import org.apache.shiro.authc.AuthenticationToken;
 public class JwtToken implements AuthenticationToken {
 
 
+    /**
+     * 密匙
+     */
     private String token;
 
     public JwtToken(String token){
         this.token = token;
     }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
 
     @Override
     public Object getPrincipal() {

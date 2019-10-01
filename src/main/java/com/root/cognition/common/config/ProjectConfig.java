@@ -13,9 +13,29 @@ public class ProjectConfig {
 
     /*** 上传路径*/
     private String uploadPath;
+    /*** jwt时间即时*/
+    private Integer jwtTime;
+    /*** jwt登陆标识*/
+    private String jwtLoginSign;
 
     public String getUploadPath() {
         return uploadPath;
+    }
+
+    public Integer getJwtTime() {
+        return jwtTime;
+    }
+
+    public String getJwtLoginSign() {
+        return jwtLoginSign;
+    }
+
+    public void setJwtLoginSign(String jwtLoginSign) {
+        this.jwtLoginSign = jwtLoginSign;
+    }
+
+    public void setJwtTime(Integer jwtTime) {
+        this.jwtTime = jwtTime;
     }
 
     public void setUploadPath(String uploadPath) {

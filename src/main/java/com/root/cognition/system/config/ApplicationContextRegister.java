@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ApplicationContextRegister implements ApplicationContextAware {
+
     private static Logger logger = LoggerFactory.getLogger(ApplicationContextRegister.class);
+
     private static ApplicationContext APPLICATION_CONTEXT;
 
     /**

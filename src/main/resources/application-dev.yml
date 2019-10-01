@@ -1,10 +1,16 @@
 cognition:
+  jwtTime: 3
+  jwtLoginSign: hanimajiokbul
   #为映射关系项目中间已自动创建文件，同时上传文件地址前缀相同
-#  uploadPath: /mnt/plarfrom/
+  #  uploadPath: /mnt/plarfrom/
   uploadPath: F:/IdeaProjects/
-  level:
+
+#日志等级
+logging:
+  level: debug
+#  level: info
 #    com.root.cognition: debug
-     com.root.cognition: info
+
 spring:
   #数据库编写（使用alibaba）
   datasource:
