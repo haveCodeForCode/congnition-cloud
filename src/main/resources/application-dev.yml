@@ -7,9 +7,9 @@ cognition:
 
 #日志等级
 logging:
-  level: debug
-#  level: info
-#    com.root.cognition: debug
+  level:
+    com.root.cognition: debug
+#   com.root.cognition: info
 
 spring:
   #数据库编写（使用alibaba）

@@ -25,10 +25,6 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         this.projectConfig = projectConfig;
     }
 
-    /**
-     * 登陆标识
-     */
-    private String loginSIGN = projectConfig.getJwtLoginSign();
 
     /**
      * 检测用户是否登录
@@ -40,9 +36,11 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
-        //
+        //登陆标识，配置文件控制
         HttpServletRequest req = (HttpServletRequest) request;
-        String authorization = req.getHeader(loginSIGN);
+        //登陆标识
+        String loginSign = projectConfig.getJwtLoginSign();
+        String authorization = req.getHeader(loginSign);
         return authorization != null;
 
     }
@@ -50,7 +48,9 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest req = (HttpServletRequest) request;
-        String header = req.getHeader(loginSIGN);
+        //登陆标识
+        String loginSign = projectConfig.getJwtLoginSign();
+        String header = req.getHeader(loginSign);
         JwtToken token = new JwtToken(header);
         getSubject(request, response).login(token);
         return true;

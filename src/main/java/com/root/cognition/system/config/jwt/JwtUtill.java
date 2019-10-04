@@ -55,10 +55,10 @@ public class JwtUtill {
      * @param token 传入值编码获取
      * @return
      */
-    public static String getUsername(String token) {
+    public static String getUserId(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("username").asString();
+            return jwt.getClaim("uid").asString();
         } catch (JWTDecodeException e) {
             return null;
         }
@@ -68,11 +68,11 @@ public class JwtUtill {
     /**
      * 生成签名
      *
-     * @param username
+     *
      * @param password
      * @return
      */
-    public String sign(String username, String password) {
+    public String sign(Long userId, String password) {
         try {
             long time = EXPIRE_TIME_PRESET * projectConfig.getJwtTime();
             // 指定过期时间
@@ -80,7 +80,7 @@ public class JwtUtill {
 
             Algorithm algorithm = Algorithm.HMAC256(password);
             return JWT.create()
-                    .withClaim("username", username)
+                    .withClaim("uid", userId)
                     .withExpiresAt(date)
                     .sign(algorithm);
         } catch (UnsupportedEncodingException e) {

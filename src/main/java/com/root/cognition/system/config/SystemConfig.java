@@ -6,7 +6,7 @@ import com.root.cognition.system.config.redis.RedisCacheManager;
 import com.root.cognition.system.config.redis.RedisManager;
 import com.root.cognition.system.config.redis.RedisSessionDAO;
 import com.root.cognition.system.config.shiro.BDSessionListener;
-import com.root.cognition.system.config.shiro.UserRealm;
+import com.root.cognition.system.config.shiro.ShiroDatabaseRealm;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -46,7 +46,7 @@ public class SystemConfig {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //设置realm.
-        securityManager.setRealm(new UserRealm());
+        securityManager.setRealm(new ShiroDatabaseRealm());
         // 自定义缓存实现 使用redis
         // 放入缓存控制器
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
