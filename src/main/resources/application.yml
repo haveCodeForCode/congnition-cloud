@@ -2,9 +2,6 @@
 server:
   port: 8090
 #  port: 80
-  servlet:
-    session:
-      timeout: 1800
 
 spring:
   #允许bean定义重写 spring2.2

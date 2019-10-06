@@ -1,26 +1,20 @@
 package com.root.cognition.system.config;
 
 
-import com.root.cognition.common.config.Constant;
 import com.root.cognition.system.config.redis.RedisCacheManager;
 import com.root.cognition.system.config.redis.RedisManager;
-import com.root.cognition.system.config.redis.RedisSessionDAO;
-import com.root.cognition.system.config.shiro.BDSessionListener;
 import com.root.cognition.system.config.shiro.ShiroDatabaseRealm;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.SessionListener;
-import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
-import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.ArrayList;
-import java.util.Collection;
+import org.springframework.context.annotation.DependsOn;
 
 /**
  * 系统基本设置
@@ -35,11 +29,9 @@ public class SystemConfig {
      */
     @Value("${spring.cache.type}")
     private String cacheType;
-    @Value("${server.servlet.session.timeout}")
-    private int tomcatTimeout;
 
     /**
-     * 认证控制器
+     * 关闭shiro认证控制器
      * @return
      */
     @Bean("securityManager")
@@ -47,17 +39,20 @@ public class SystemConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //设置realm.
         securityManager.setRealm(new ShiroDatabaseRealm());
-        // 自定义缓存实现 使用redis
-        // 放入缓存控制器
-        if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
-            securityManager.setCacheManager(rediscacheManager());
-        } else {
-            securityManager.setCacheManager(ehCacheManager());
-        }
-        //放入session控制器
-        securityManager.setSessionManager(sessionManager());
+        //关闭自带session
+        DefaultSessionStorageEvaluator evaluator = new DefaultSessionStorageEvaluator();
+        //session储存关闭
+        evaluator.setSessionStorageEnabled(false);
+//        是否使用Subject's Session来保持其自身的状态，根据配置，在每个对象的基础上进行控制sessionStorageEvaluator。
+//        默认Evaluator值为DefaultSessionStorageEvaluator，它支持在全局级别为所有主题启用或禁用会话持久性会话使用（默认情况下允许使用会话）。
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        //全局关闭session
+        subjectDAO.setSessionStorageEvaluator(evaluator);
+        //
+        securityManager.setSubjectDAO(subjectDAO);
         return securityManager;
     }
+
 
 //*************************cacheManager缓存******************************
 
@@ -109,52 +104,19 @@ public class SystemConfig {
         return redisCacheManager;
     }
 
-//*************************session********************************
-    /**
-     * RedisSessionDAO shiro sessionDao层的实现 通过redis
-     * 使用的是shiro-redis开源插件
-     */
-    @Bean("redisSessionDAO")
-    public RedisSessionDAO redisSessionDAO() {
-        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-        RedisManager redisManager = new RedisManager();
-        redisSessionDAO.setRedisManager(redisManager);
-        return redisSessionDAO;
-    }
+
+    //*********************************spring代理*****************************************
 
     /**
-     * sessionDao注入方式
-     *
+     * spring自动代理
      * @return
      */
-    @Bean("sessionDAO")
-    public SessionDAO sessionDAO() {
-        if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
-            return redisSessionDAO();
-        } else {
-            return new MemorySessionDAO();
-        }
-    }
-
-
-    /**
-     * session的管理
-     */
-    @Bean("sessionManager")
-    public DefaultWebSessionManager sessionManager() {
-        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-        // 去掉shiro登录时url里的JSESSIONID
-        sessionManager.setSessionIdUrlRewritingEnabled(false);
-        // session时间
-        sessionManager.setGlobalSessionTimeout(tomcatTimeout * 1000);
-        // session调用方法
-        sessionManager.setSessionDAO(sessionDAO());
-        // sessionListener监听接口组
-        Collection<SessionListener> listeners = new ArrayList<SessionListener>();
-        listeners.add(new BDSessionListener());
-        // session操作器放入session监控
-        sessionManager.setSessionListeners(listeners);
-        return sessionManager;
+    @Bean
+    @DependsOn("lifecycleBeanPostProcessor")
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
+        return defaultAdvisorAutoProxyCreator;
     }
 
 

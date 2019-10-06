@@ -1,6 +1,7 @@
 package com.root.cognition.system.config;
 
 
+import com.root.cognition.system.config.jwt.JwtFilter;
 import com.root.cognition.system.service.UserService;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -9,7 +10,10 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 /**
@@ -29,28 +33,19 @@ public class ShiroConfig {
     @Bean(name = "shiroFilterFactory")
     ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager,UserService userService) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        //设置拦截器
+        Map<String, Filter> filterMap = new HashMap<>();
+        filterMap.put("jwt", new JwtFilter());
+        shiroFilterFactoryBean.setFilters(filterMap);
         //设置安全管理器
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        shiroFilterFactoryBean.setSecurityManager(securityManager);;
         //登录地址
         shiroFilterFactoryBean.setLoginUrl("/toInterface");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/", "anon");
-        filterChainDefinitionMap.put("/toLogin", "anon");
-        filterChainDefinitionMap.put("/toHome", "anon");
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/toInterface", "anon");
-        filterChainDefinitionMap.put("/toRegister", "anon");
-        filterChainDefinitionMap.put("/register/**", "anon");
-        filterChainDefinitionMap.put("/getVerify", "anon");
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/website-front/**", "anon");
-        filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/fonts/**", "anon");
-        filterChainDefinitionMap.put("/img/**", "anon");
-        filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/**", "authc");
+//        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/**", "jwt");
 //        filterChainDefinitionMap.put("/docs/**", "anon");
 //        filterChainDefinitionMap.put("/druid/**", "anon");
 //        filterChainDefinitionMap.put("/upload/**", "anon");
@@ -75,8 +70,6 @@ public class ShiroConfig {
         return authorizationAttributeSourceAdvisor;
     }
 
-
-//************************session**********************************
 
     /**
      * 添加shiro 自主注入bean的生命周期管理

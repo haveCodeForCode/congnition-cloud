@@ -1,13 +1,15 @@
 package com.root.cognition.system.config.shiro;
 
+import com.auth0.jwt.JWT;
+import com.root.cognition.common.config.Constant;
 import com.root.cognition.common.until.StringUtils;
 import com.root.cognition.system.config.ApplicationContextRegister;
 import com.root.cognition.system.config.jwt.JwtToken;
 import com.root.cognition.system.config.jwt.JwtUtill;
+import com.root.cognition.system.dao.UserDao;
+import com.root.cognition.system.entity.User;
 import com.root.cognition.system.service.MenuService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -77,6 +79,22 @@ public class ShiroDatabaseRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String token = authenticationToken.getCredentials().toString();
         String userId = JwtUtill.getUserId(token);
-        return null;
+        UserDao userDao = ApplicationContextRegister.getBean(UserDao.class);
+        if (StringUtils.isNotEmpty(userId)){
+            User user= userDao.get(Long.valueOf(userId));
+            if (user!=null){
+                if (user.getDelFlag().equals(Constant.STRING_ZERO)){
+                    throw new DisabledAccountException("901");
+                }
+                if(!JwtUtill.verify(token,userId,user.getUserPassword())){
+                    throw new UnknownAccountException("900");
+                }
+                return new SimpleAuthenticationInfo(token, token, "realm");
+            }else {
+                throw new UnknownAccountException("900");
+            }
+        }else{
+            throw new UnknownAccountException("900");
+        }
     }
 }

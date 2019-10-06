@@ -63,6 +63,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
                 executeLogin(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
+
             }
         }
 
