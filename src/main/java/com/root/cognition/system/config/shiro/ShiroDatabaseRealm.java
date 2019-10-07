@@ -1,11 +1,10 @@
 package com.root.cognition.system.config.shiro;
 
-import com.auth0.jwt.JWT;
 import com.root.cognition.common.config.Constant;
 import com.root.cognition.common.until.StringUtils;
 import com.root.cognition.system.config.ApplicationContextRegister;
 import com.root.cognition.system.config.jwt.JwtToken;
-import com.root.cognition.system.config.jwt.JwtUtill;
+import com.root.cognition.system.config.jwt.JwtUtil;
 import com.root.cognition.system.dao.UserDao;
 import com.root.cognition.system.entity.User;
 import com.root.cognition.system.service.MenuService;
@@ -44,7 +43,7 @@ public class ShiroDatabaseRealm extends AuthorizingRealm {
         //菜单服务类注册
         MenuService menuService = ApplicationContextRegister.getBean(MenuService.class);
         //获取userID
-        String userId = JwtUtill.getUserId(principalCollection.toString());
+        String userId = JwtUtil.getUserId(principalCollection.toString());
         //新建授权
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //判断用户对象是否为空
@@ -78,7 +77,7 @@ public class ShiroDatabaseRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String token = authenticationToken.getCredentials().toString();
-        String userId = JwtUtill.getUserId(token);
+        String userId = JwtUtil.getUserId(token);
         UserDao userDao = ApplicationContextRegister.getBean(UserDao.class);
         if (StringUtils.isNotEmpty(userId)){
             User user= userDao.get(Long.valueOf(userId));
@@ -86,7 +85,7 @@ public class ShiroDatabaseRealm extends AuthorizingRealm {
                 if (user.getDelFlag().equals(Constant.STRING_ZERO)){
                     throw new DisabledAccountException("901");
                 }
-                if(!JwtUtill.verify(token,userId,user.getUserPassword())){
+                if(!JwtUtil.verify(token,userId,user.getUserPassword())){
                     throw new UnknownAccountException("900");
                 }
                 return new SimpleAuthenticationInfo(token, token, "realm");

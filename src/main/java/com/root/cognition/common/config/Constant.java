@@ -103,4 +103,23 @@ public class Constant {
     public static final String FREE_SMS = "free_send_sms";
     public static final String REGISTER_SMS = "register_send_sms";
     public static final String VERIFICATION_SMS = "Verification_send_sms";
+
+
+    /**
+     * 请求成功
+     */
+    public static final int SERVER_SUCCESS = 200;
+    public static final String DEFAULT_SUCCESS_MSG = "成功";
+
+    /**
+     * 服务器异常
+     */
+    public static final int SERVER_ERROR = 500;
+    public static final String SERVER_ERROR_MSG = "服务器繁忙,请您稍后再试";
+
+    /**
+     * 数据异常
+     */
+    public static final int DATA_SERVER_ERROR = 500;
+    public static final String DATA_SERVER_ERROR_MSG = "数据异常,请联系客服";
 }

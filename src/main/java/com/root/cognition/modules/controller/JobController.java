@@ -1,10 +1,10 @@
 package com.root.cognition.modules.controller;
 
 
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.common.until.PageUtils;
 import com.root.cognition.common.until.Query;
-import com.root.cognition.common.until.ResultMap;
 import com.root.cognition.modules.entity.Task;
 import com.root.cognition.modules.service.TaskJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +63,9 @@ public class JobController extends BaseController {
 	 * 信息
 	 */
 	@RequestMapping("/info/{id}")
-	public ResultMap info(@PathVariable("id") Long id) {
+	public ResultData info(@PathVariable("id") Long id) {
 		Task taskScheduleJob = taskScheduleJobService.get(id);
-		return ResultMap.success().put("taskScheduleJob", taskScheduleJob);
+		return ResultData.success().put("taskScheduleJob", taskScheduleJob);
 	}
 
 	/**
@@ -73,11 +73,11 @@ public class JobController extends BaseController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	public ResultMap save(Task taskScheduleJob) {
+	public ResultData save(Task taskScheduleJob) {
 		if (taskScheduleJobService.save(taskScheduleJob) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 	/**
@@ -85,9 +85,9 @@ public class JobController extends BaseController {
 	 */
 	@ResponseBody
 	@PostMapping("/update")
-	public ResultMap update(Task taskScheduleJob) {
+	public ResultData update(Task taskScheduleJob) {
 		taskScheduleJobService.update(taskScheduleJob);
-		return ResultMap.success();
+		return ResultData.success();
 	}
 
 	/**
@@ -95,11 +95,11 @@ public class JobController extends BaseController {
 	 */
 	@PostMapping("/remove")
 	@ResponseBody
-	public ResultMap remove(Long id) {
+	public ResultData remove(Long id) {
 		if (taskScheduleJobService.remove(id) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 	/**
@@ -107,14 +107,14 @@ public class JobController extends BaseController {
 	 */
 	@PostMapping("/batchRemove")
 	@ResponseBody
-	public ResultMap remove(@RequestParam("ids[]") Long[] ids) {
+	public ResultData remove(@RequestParam("ids[]") Long[] ids) {
 		taskScheduleJobService.batchRemove(ids);
-		return ResultMap.success();
+		return ResultData.success();
 	}
 
 	@PostMapping(value = "/changeJobStatus")
 	@ResponseBody
-	public ResultMap changeJobStatus(Long id,String cmd ) {
+	public ResultData changeJobStatus(Long id, String cmd ) {
 		String label = "停止";
 		if ("start".equals(cmd)) {
 			label = "启动";
@@ -123,11 +123,11 @@ public class JobController extends BaseController {
 		}
 		try {
 			taskScheduleJobService.changeStatus(id, cmd);
-			return ResultMap.success("任务" + label + "成功");
+			return ResultData.success("任务" + label + "成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ResultMap.success("任务" + label + "失败");
+		return ResultData.success("任务" + label + "失败");
 	}
 
 }

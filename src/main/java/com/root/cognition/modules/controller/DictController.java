@@ -1,10 +1,10 @@
 package com.root.cognition.modules.controller;
 
 import com.root.cognition.common.config.Constant;
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.common.until.PageUtils;
 import com.root.cognition.common.until.Query;
-import com.root.cognition.common.until.ResultMap;
 import com.root.cognition.common.until.StringUtils;
 import com.root.cognition.modules.entity.Dict;
 import com.root.cognition.modules.service.DictService;
@@ -88,13 +88,13 @@ public class DictController extends BaseController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("modules:dict:add")
-    public ResultMap save(Dict dict) {
+    public ResultData save(Dict dict) {
         //补充实体内信息
         dict.setCreateBy(getUserId());
         if (dictService.save(dict) > 0) {
-            return ResultMap.success();
+            return ResultData.success();
         }
-        return ResultMap.error();
+        return ResultData.error();
     }
 
     /**
@@ -103,11 +103,11 @@ public class DictController extends BaseController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("modules:dict:edit")
-    public ResultMap update(Dict dict) {
+    public ResultData update(Dict dict) {
         dict.setUpdateBy(getUserId());
         dict.setUpdateTime(new Date());
         dictService.update(dict);
-        return ResultMap.success();
+        return ResultData.success();
     }
 
     /**
@@ -116,11 +116,11 @@ public class DictController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("modules:dict:remove")
-    public ResultMap remove(Long id) {
+    public ResultData remove(Long id) {
         if (dictService.remove(id) > 0) {
-            return ResultMap.success();
+            return ResultData.success();
         }
-        return ResultMap.error();
+        return ResultData.error();
     }
 
     /**
@@ -129,9 +129,9 @@ public class DictController extends BaseController {
     @PostMapping("/batchRemove")
     @ResponseBody
     @RequiresPermissions("modules:dict:batchRemove")
-    public ResultMap remove(@RequestParam("ids[]") Long[] ids) {
+    public ResultData remove(@RequestParam("ids[]") Long[] ids) {
         dictService.batchRemove(ids);
-        return ResultMap.success();
+        return ResultData.success();
     }
 
     @GetMapping("/type")

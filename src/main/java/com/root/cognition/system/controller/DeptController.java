@@ -2,10 +2,10 @@ package com.root.cognition.system.controller;
 
 
 import com.root.cognition.common.config.Constant;
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.system.persistence.Tree;
 import com.root.cognition.common.until.Query;
-import com.root.cognition.common.until.ResultMap;
 import com.root.cognition.system.entity.Dept;
 import com.root.cognition.system.service.DeptService;
 import org.apache.ibatis.annotations.Param;
@@ -92,13 +92,13 @@ public class DeptController extends BaseController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("system:dept:add")
-	public ResultMap save(Dept dept) {
+	public ResultData save(Dept dept) {
 		//根据权限存放的
 		dept.setCreateBy(getUserId());
 		if (deptService.save(dept) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 	/**
@@ -107,11 +107,11 @@ public class DeptController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("system:dept:edit")
-	public ResultMap update(Dept dept) {
+	public ResultData update(Dept dept) {
 		if (deptService.update(dept) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 	/**
@@ -120,20 +120,20 @@ public class DeptController extends BaseController {
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("system:dept:remove")
-	public ResultMap remove(Long deptId) {
+	public ResultData remove(Long deptId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("parentId", deptId);
 		if(deptService.count(map)>0) {
-			return ResultMap.customMap(1, "包含下级部门,不允许修改",null);
+			return ResultData.customMap(1, "包含下级部门,不允许修改",null);
 		}
 		if(deptService.checkDeptHasUser(deptId)) {
 			if (deptService.delete(deptId) > 0) {
-				return ResultMap.error();
+				return ResultData.error();
 			}
 		}else {
-			return ResultMap.customMap(1, "部门包含用户,不允许修改",null);
+			return ResultData.customMap(1, "部门包含用户,不允许修改",null);
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 	/**
@@ -142,9 +142,9 @@ public class DeptController extends BaseController {
 	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("system:dept:batchRemove")
-	public ResultMap remove(@RequestParam("ids[]") Long[] deptIds) {
+	public ResultData remove(@RequestParam("ids[]") Long[] deptIds) {
 		deptService.batchDelete(deptIds);
-		return ResultMap.success();
+		return ResultData.success();
 	}
 
 	@GetMapping("/tree")

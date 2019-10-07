@@ -1,10 +1,10 @@
 package com.root.cognition.system.controller;
 
 import com.root.cognition.common.config.Constant;
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.system.persistence.Tree;
 import com.root.cognition.common.until.Query;
-import com.root.cognition.common.until.ResultMap;
 import com.root.cognition.common.until.StringUtils;
 import com.root.cognition.system.entity.Menu;
 import com.root.cognition.system.service.MenuService;
@@ -91,13 +91,13 @@ public class MenuController extends BaseController {
 	@RequiresPermissions("sys:menu:add")
 	@PostMapping("/save")
 	@ResponseBody
-	ResultMap save(Menu menu) {
+    ResultData save(Menu menu) {
 		//根据权限存入创建者
 		menu.setCreateBy(getUserId());
 		if (menuService.save(menu) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		} else {
-			return ResultMap.customMap(1, "保存失败", null);
+			return ResultData.customMap(1, "保存失败", null);
 		}
 	}
 
@@ -105,11 +105,11 @@ public class MenuController extends BaseController {
 	@RequiresPermissions("sys:menu:edit")
 	@PostMapping("/update")
 	@ResponseBody
-	ResultMap update(Menu menu) {
+    ResultData update(Menu menu) {
 		if (menuService.update(menu) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		} else {
-			return ResultMap.customMap(1, "更新失败", null);
+			return ResultData.customMap(1, "更新失败", null);
 		}
 	}
 
@@ -117,11 +117,11 @@ public class MenuController extends BaseController {
 	@RequiresPermissions("sys:menu:remove")
 	@PostMapping("/remove")
 	@ResponseBody
-	ResultMap remove(Long id) {
+    ResultData remove(Long id) {
 		if (menuService.delete(id) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		} else {
-			return ResultMap.customMap(1, "删除失败", null);
+			return ResultData.customMap(1, "删除失败", null);
 		}
 	}
 

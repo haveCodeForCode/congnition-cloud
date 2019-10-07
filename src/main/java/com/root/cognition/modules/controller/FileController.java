@@ -4,7 +4,7 @@ import com.root.cognition.common.config.ProjectConfig;
 import com.root.cognition.common.until.FileUtil;
 import com.root.cognition.common.until.PageUtils;
 import com.root.cognition.common.until.Query;
-import com.root.cognition.common.until.ResultMap;
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.modules.entity.FileRecord;
 import com.root.cognition.modules.service.FileService;
 import com.root.cognition.system.persistence.BaseController;
@@ -94,9 +94,9 @@ public class FileController extends BaseController {
 	 */
 	@RequestMapping("/info/{id}")
 	@RequiresPermissions("common:info")
-	public ResultMap info(@PathVariable("id") Long id) {
+	public ResultData info(@PathVariable("id") Long id) {
 		FileRecord sysFileRecord = fileService.get(id);
-		return ResultMap.success().put("sysFile", sysFileRecord);
+		return ResultData.success().put("sysFile", sysFileRecord);
 	}
 
 //	/**
@@ -117,9 +117,9 @@ public class FileController extends BaseController {
 	 */
 	@RequestMapping("/update")
 	@RequiresPermissions("common:update")
-	public ResultMap update(@RequestBody FileRecord sysFileRecord) {
+	public ResultData update(@RequestBody FileRecord sysFileRecord) {
 		fileService.update(sysFileRecord);
-		return ResultMap.success();
+		return ResultData.success();
 	}
 
 	/**
@@ -128,19 +128,19 @@ public class FileController extends BaseController {
 	@PostMapping("/remove")
 	@ResponseBody
 	 @RequiresPermissions("common:remove")
-	public ResultMap remove(Long id, HttpServletRequest request) {
+	public ResultData remove(Long id, HttpServletRequest request) {
 		if ("test".equals(getUsername())) {
-			return ResultMap.error("演示系统不允许修改,完整体验请部署程序");
+			return ResultData.error("演示系统不允许修改,完整体验请部署程序");
 		}
 		String fileName = projectConfig.getUploadPath() + fileService.get(id).getUrl().replace("/files/", "");
 		if (fileService.remove(id) > 0) {
 			boolean b = FileUtil.deleteFile(fileName);
 			if (!b) {
-				return ResultMap.error("数据库记录删除成功，文件删除失败");
+				return ResultData.error("数据库记录删除成功，文件删除失败");
 			}
-			return ResultMap.success();
+			return ResultData.success();
 		} else {
-			return ResultMap.error();
+			return ResultData.error();
 		}
 	}
 
@@ -150,16 +150,16 @@ public class FileController extends BaseController {
 	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("common:remove")
-	public ResultMap remove(@RequestParam("ids[]") Long[] ids) {
+	public ResultData remove(@RequestParam("ids[]") Long[] ids) {
 		fileService.batchRemove(ids);
-		return ResultMap.success();
+		return ResultData.success();
 	}
 
 
 	@ResponseBody
 	@PostMapping("/upload")
     @Async("taskExecutor")
-	ResultMap upload(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
+    ResultData upload(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
 		//文件名
 		String fileName = multipartFile.getOriginalFilename();
 		String publicUrl = "";
@@ -186,21 +186,21 @@ public class FileController extends BaseController {
 					}
 					multipartFile.transferTo(file);
 					if (fileService.save(sysFileRecord) > 0) {
-						return ResultMap.success().put("fileName", sysFileRecord.getUrl());
+						return ResultData.success().put("fileName", sysFileRecord.getUrl());
 					}
 					System.err.println("保存失败！！");
 					logger.info("保存失败！！");
-					return ResultMap.error();
+					return ResultData.error();
 				} catch (Exception e) {
 					System.err.println(e.toString());
 					logger.info(e.toString());
-					return ResultMap.error();
+					return ResultData.error();
 				}
 			}
-			return ResultMap.error();
+			return ResultData.error();
 		} else {
 			logger.info("选择的文件为空");
-			return ResultMap.error("您选择的文件为空");
+			return ResultData.error("您选择的文件为空");
 		}
 	}
 

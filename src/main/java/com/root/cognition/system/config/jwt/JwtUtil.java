@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.root.cognition.common.config.ProjectConfig;
+import com.root.cognition.system.config.ApplicationContextRegister;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
@@ -15,19 +16,12 @@ import java.util.Date;
  * @author Worry
  * @version 2019/9/27
  */
-public class JwtUtill {
+public class JwtUtil {
 
     /**
      * 过期时间
      */
     private static final long EXPIRE_TIME_PRESET = 24 * 60 * 1000;
-
-    private ProjectConfig projectConfig;
-
-    @Resource
-    public void setProjectConfig(ProjectConfig projectConfig) {
-        this.projectConfig = projectConfig;
-    }
 
     /**
      * 效验token是否正确
@@ -71,8 +65,9 @@ public class JwtUtill {
      * @param password
      * @return
      */
-    public String sign(Long userId, String password) {
+    public static String sign(Long userId, String password) {
         try {
+            ProjectConfig projectConfig = ApplicationContextRegister.getBean(ProjectConfig.class);
             long time = EXPIRE_TIME_PRESET * projectConfig.getJwtTime();
             // 指定过期时间
             Date date = new Date(System.currentTimeMillis() + time);

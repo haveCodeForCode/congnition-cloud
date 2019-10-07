@@ -1,11 +1,11 @@
 package com.root.cognition.system.controller;
 
 
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.system.persistence.Tree;
 import com.root.cognition.common.until.PageUtils;
 import com.root.cognition.common.until.Query;
-import com.root.cognition.common.until.ResultMap;
 import com.root.cognition.modules.service.DictService;
 import com.root.cognition.system.entity.Dept;
 import com.root.cognition.system.entity.Role;
@@ -87,23 +87,23 @@ public class UserController extends BaseController {
 //	@Log("保存用户")
 	@PostMapping("/save")
 	@ResponseBody
-	ResultMap save(User user) {
+    ResultData save(User user) {
 //		user.setUserPassword(Md5Utils.encrypt(user.getUsername(), user.getPassword()));
 		if (userService.save(user) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 	@RequiresPermissions("sys:user:edit")
 //	@Log("更新用户")
 	@PostMapping("/update")
 	@ResponseBody
-	ResultMap update(User user) {
+    ResultData update(User user) {
 		if (userService.update(user) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 
@@ -111,11 +111,11 @@ public class UserController extends BaseController {
 //	@Log("更新用户")
 	@PostMapping("/updatePeronal")
 	@ResponseBody
-	ResultMap updatePeronal(User user) {
+    ResultData updatePeronal(User user) {
 		if (userService.updatePersonal(user) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 
@@ -123,23 +123,23 @@ public class UserController extends BaseController {
 //	@Log("删除用户")
 	@PostMapping("/remove")
 	@ResponseBody
-	ResultMap remove(Long id) {
+    ResultData remove(Long id) {
 		if (userService.delete(id) > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 	@RequiresPermissions("sys:user:batchRemove")
 //	@Log("批量删除用户")
 	@PostMapping("/batchRemove")
 	@ResponseBody
-	ResultMap batchRemove(@RequestParam("ids[]") Long[] userIds) {
+    ResultData batchRemove(@RequestParam("ids[]") Long[] userIds) {
 		int r = userService.batchDelete(userIds);
 		if (r > 0) {
-			return ResultMap.success();
+			return ResultData.success();
 		}
-		return ResultMap.error();
+		return ResultData.error();
 	}
 
 	@PostMapping("/exit")

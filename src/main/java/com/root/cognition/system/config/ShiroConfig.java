@@ -40,18 +40,8 @@ public class ShiroConfig {
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);;
         //登录地址
-        shiroFilterFactoryBean.setLoginUrl("/toInterface");
-        shiroFilterFactoryBean.setSuccessUrl("/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//        filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/**", "jwt");
-//        filterChainDefinitionMap.put("/docs/**", "anon");
-//        filterChainDefinitionMap.put("/druid/**", "anon");
-//        filterChainDefinitionMap.put("/upload/**", "anon");
-//        filterChainDefinitionMap.put("/files/**", "anon");
-//        filterChainDefinitionMap.put("/blog", "anon");
-//        filterChainDefinitionMap.put("/blog/open/**", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

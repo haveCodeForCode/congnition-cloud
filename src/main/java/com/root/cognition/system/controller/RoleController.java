@@ -1,8 +1,8 @@
 package com.root.cognition.system.controller;
 
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.common.until.Query;
-import com.root.cognition.common.until.ResultMap;
 import com.root.cognition.system.entity.Role;
 import com.root.cognition.system.service.RoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -64,13 +64,13 @@ public class RoleController extends BaseController {
     @RequiresPermissions("sys:role:add")
     @PostMapping("/save")
     @ResponseBody
-    ResultMap save(Role role) {
+    ResultData save(Role role) {
         // 根据权限存入id，更新人
         role.setCreateBy(getUserId());
         if (roleService.save(role) > 0) {
-            return ResultMap.success();
+            return ResultData.success();
         } else {
-            return ResultMap.error();
+            return ResultData.error();
         }
     }
 
@@ -78,13 +78,13 @@ public class RoleController extends BaseController {
     @RequiresPermissions("sys:role:edit")
     @PostMapping("/update")
     @ResponseBody
-    ResultMap update(Role role) {
+    ResultData update(Role role) {
         //roleId转值id
         int state = roleService.update(role);
         if (state > 0) {
-            return ResultMap.success();
+            return ResultData.success();
         } else {
-            return ResultMap.error();
+            return ResultData.error();
         }
     }
 
@@ -92,11 +92,11 @@ public class RoleController extends BaseController {
     @RequiresPermissions("sys:role:remove")
     @PostMapping("/remove")
     @ResponseBody
-    ResultMap delete(Long id) {
+    ResultData delete(Long id) {
         if (roleService.delete(id) > 0) {
-            return ResultMap.success();
+            return ResultData.success();
         } else {
-            return ResultMap.error();
+            return ResultData.error();
         }
     }
 
@@ -104,12 +104,12 @@ public class RoleController extends BaseController {
     @RequiresPermissions("sys:role:batchRemove")
     @PostMapping("/batchRemove")
     @ResponseBody
-    ResultMap batchRemove(@RequestParam("ids[]") Long[] ids) {
+    ResultData batchRemove(@RequestParam("ids[]") Long[] ids) {
         int r = roleService.batchDelect(ids);
         if (r > 0) {
-            return ResultMap.success();
+            return ResultData.success();
         }
-        return ResultMap.error();
+        return ResultData.error();
 
     }
 }

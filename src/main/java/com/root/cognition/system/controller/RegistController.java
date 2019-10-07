@@ -79,7 +79,7 @@ public class RegistController extends BaseController {
             User userold = userService.getWihtLogininfo(loginInfo);
 
             if (userold != null) {
-                return ResultMap.error("用户已存在");
+                return ResultData.error("用户已存在");
             } else {
                 //插入很用户
                 user.preInsert();
@@ -100,11 +100,11 @@ public class RegistController extends BaseController {
                     randomKey = userVo.getEmail() + "random";
                 }
                 redisService.redisDel(randomKey);
-                return ResultMap.success("注册成功");
+                return ResultData.success("注册成功");
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return ResultMap.error("注册失败");
+            return ResultData.error("注册失败");
         }
 
     }
@@ -182,9 +182,9 @@ public class RegistController extends BaseController {
 //	@Log("发送短信验证码")
     @PostMapping("/sendMobileCode")
     @ResponseBody
-    ResultMap sendMobileCode(@RequestParam String mobile) {
+    ResultData sendMobileCode(@RequestParam String mobile) {
         if (StringUtils.isEmpty(mobile)) {
-            return ResultMap.error("手机号码缺失");
+            return ResultData.error("手机号码缺失");
         }
 
         String randomNumber = Tools.getRandomNumber(6);
@@ -208,16 +208,16 @@ public class RegistController extends BaseController {
                 String randomkey = mobile + "random";
                 String reidsState = redisService.redisSet(randomkey, randomNumber, 0);
                 if (StringUtils.isNotEmpty(reidsState)) {
-                    return ResultMap.success("发送成功");
+                    return ResultData.success("发送成功");
                 } else {
-                    return ResultMap.error("发送失败");
+                    return ResultData.error("发送失败");
                 }
             } else {
-                return ResultMap.error("发送失败");
+                return ResultData.error("发送失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return ResultMap.error("发送失败");
+            return ResultData.error("发送失败");
         }
     }
 

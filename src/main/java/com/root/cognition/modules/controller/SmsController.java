@@ -3,7 +3,7 @@ package com.root.cognition.modules.controller;
 import com.root.cognition.common.config.Constant;
 import com.root.cognition.common.until.PageUtils;
 import com.root.cognition.common.until.Query;
-import com.root.cognition.common.until.ResultMap;
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.modules.config.AlibabaSms;
 import com.root.cognition.modules.entity.Dict;
 import com.root.cognition.modules.entity.SmsLog;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,14 +82,14 @@ public class SmsController {
 
     @PostMapping("/sendMessage")
     @ResponseBody
-    public ResultMap sendAlibabaSms(String mobile, String signName, String templateCode, String[] keyword, String outId) throws InterruptedException {
+    public ResultData sendAlibabaSms(String mobile, String signName, String templateCode, String[] keyword, String outId) throws InterruptedException {
         alibabaSms.setConfigureAlibaba();
         String moudle = Constant.FREE_SMS;
         int times=smsLogService.snedSmsMessage(moudle,mobile,signName,templateCode,keyword,outId);
         if (times>0) {
-            return ResultMap.success();
+            return ResultData.success();
         }
-        return ResultMap.error("系统错误");
+        return ResultData.error("系统错误");
     }
 
 /**************************************************************************/
@@ -150,11 +149,11 @@ public class SmsController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("modules:sms:add")
-    public ResultMap save(SmsLog smsLog){
+    public ResultData save(SmsLog smsLog){
         if(smsLogService.save(smsLog)>0){
-            return ResultMap.success();
+            return ResultData.success();
         }
-        return ResultMap.error();
+        return ResultData.error();
     }
     /**
      * 修改
@@ -162,9 +161,9 @@ public class SmsController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("modules:sms:edit")
-    public ResultMap update( SmsLog smsLog){
+    public ResultData update(SmsLog smsLog){
         smsLogService.update(smsLog);
-        return ResultMap.success();
+        return ResultData.success();
     }
 
     /**
@@ -173,11 +172,11 @@ public class SmsController {
     @PostMapping( "/remove")
     @ResponseBody
     @RequiresPermissions("modules:sms:remove")
-    public ResultMap remove(Long id){
+    public ResultData remove(Long id){
         if(smsLogService.remove(id)>0){
-            return ResultMap.success();
+            return ResultData.success();
         }
-        return ResultMap.error();
+        return ResultData.error();
     }
 
     /**
@@ -186,9 +185,9 @@ public class SmsController {
     @PostMapping( "/batchRemove")
     @ResponseBody
     @RequiresPermissions("modules:sms:batchRemove")
-    public ResultMap remove(@RequestParam("ids[]") Long[] ids){
+    public ResultData remove(@RequestParam("ids[]") Long[] ids){
         smsLogService.batchRemove(ids);
-        return ResultMap.success();
+        return ResultData.success();
     }
 
 }
