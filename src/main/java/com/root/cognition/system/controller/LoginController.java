@@ -1,19 +1,16 @@
 package com.root.cognition.system.controller;
 
 
-import com.root.cognition.common.until.ResultData;
-import com.root.cognition.system.config.jwt.JwtUtil;
-import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.common.until.RandomValidateCodeUtil;
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.common.until.StringUtils;
-import com.root.cognition.common.until.encrypt.Md5Utils;
+import com.root.cognition.system.config.jwt.JwtUtil;
 import com.root.cognition.system.entity.User;
+import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.system.service.MenuService;
 import com.root.cognition.system.service.UserService;
-import org.apache.shiro.SecurityUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,13 +82,13 @@ public class LoginController extends BaseController {
             return ResultData.result(false).setMsg("用户尚未注册~！");
         }
 
-        password = Md5Utils.encrypt(user.getId().toString(), password);
+//        password = Md5Utils.encrypt(user.getId().toString(), password);
+//        EncodeUtils.hexDecode()
+//        byte[] bytePassword = DigestUtils.sha1(password.getBytes(), , Constants.PASSWORD_HASH_INTERATIONS);
+//        String encodePassword = EncodeUtils.hexEncode(bytePassword);
 
         //创建令牌
-        String jwtToken=JwtUtil.sign(userId, password);
-
-//        UsernamePasswordToken token = new UsernamePasswordToken(loginInfo, password);
-//        Subject subject = SecurityUtils.getSubject();
+        String jwtToken = JwtUtil.sign(userId, password);
 
         try {
             return ResultData.result(true).setData(jwtToken);

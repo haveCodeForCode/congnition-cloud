@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,18 +48,18 @@ public class FileController extends BaseController {
 		this.projectConfig = projectConfig;
 	}
 
-	@GetMapping()
-	@RequiresPermissions("common:sysFile:sysFile")
-	String sysFile(Model model) {
-		Map<String, Object> params = new HashMap<>(16);
-		return "modules/file/file";
-	}
+//	@GetMapping()
+//	@RequiresPermissions("common:sysFile:sysFile")
+//	String sysFile(Model model) {
+//		Map<String, Object> params = new HashMap<>(16);
+//		return "modules/file/file";
+//	}
 
-	@GetMapping("/index")
-	String sysFileIndex(Model model) {
-		Map<String, Object> params = new HashMap<>(16);
-		return "clienthtml/userFile";
-	}
+//	@GetMapping("/index")
+//	String sysFileIndex(Model model) {
+//		Map<String, Object> params = new HashMap<>(16);
+//		return "clienthtml/userFile";
+//	}
 
 
 	@ResponseBody
@@ -96,7 +95,7 @@ public class FileController extends BaseController {
 	@RequiresPermissions("common:info")
 	public ResultData info(@PathVariable("id") Long id) {
 		FileRecord sysFileRecord = fileService.get(id);
-		return ResultData.success().put("sysFile", sysFileRecord);
+        return ResultData.result(false).setData(sysFileRecord);
 	}
 
 //	/**
@@ -119,7 +118,7 @@ public class FileController extends BaseController {
 	@RequiresPermissions("common:update")
 	public ResultData update(@RequestBody FileRecord sysFileRecord) {
 		fileService.update(sysFileRecord);
-		return ResultData.success();
+		return ResultData.result(true);
 	}
 
 	/**
@@ -129,18 +128,15 @@ public class FileController extends BaseController {
 	@ResponseBody
 	 @RequiresPermissions("common:remove")
 	public ResultData remove(Long id, HttpServletRequest request) {
-		if ("test".equals(getUsername())) {
-			return ResultData.error("演示系统不允许修改,完整体验请部署程序");
-		}
 		String fileName = projectConfig.getUploadPath() + fileService.get(id).getUrl().replace("/files/", "");
 		if (fileService.remove(id) > 0) {
 			boolean b = FileUtil.deleteFile(fileName);
 			if (!b) {
-				return ResultData.error("数据库记录删除成功，文件删除失败");
+				return ResultData.result(false).setMsg("数据库记录删除成功，文件删除失败");
 			}
-			return ResultData.success();
+			return ResultData.result(true);
 		} else {
-			return ResultData.error();
+			return ResultData.result(false);
 		}
 	}
 
@@ -152,7 +148,7 @@ public class FileController extends BaseController {
 	@RequiresPermissions("common:remove")
 	public ResultData remove(@RequestParam("ids[]") Long[] ids) {
 		fileService.batchRemove(ids);
-		return ResultData.success();
+		return ResultData.result(true);
 	}
 
 
@@ -186,21 +182,21 @@ public class FileController extends BaseController {
 					}
 					multipartFile.transferTo(file);
 					if (fileService.save(sysFileRecord) > 0) {
-						return ResultData.success().put("fileName", sysFileRecord.getUrl());
+						return ResultData.result(true).setData(sysFileRecord.getUrl());
 					}
 					System.err.println("保存失败！！");
 					logger.info("保存失败！！");
-					return ResultData.error();
+					return ResultData.result(false);
 				} catch (Exception e) {
 					System.err.println(e.toString());
 					logger.info(e.toString());
-					return ResultData.error();
+					return ResultData.result(false);
 				}
 			}
-			return ResultData.error();
+			return ResultData.result(false);
 		} else {
 			logger.info("选择的文件为空");
-			return ResultData.error("您选择的文件为空");
+			return ResultData.result(false).setMsg("您选择的文件为空");
 		}
 	}
 

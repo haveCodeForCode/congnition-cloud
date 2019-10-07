@@ -1,6 +1,6 @@
 package com.root.cognition.common.until.codegenerate;
 
-import com.root.cognition.common.until.Encodes;
+import com.root.cognition.common.until.EncodesUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 import org.springframework.context.annotation.Lazy;
@@ -43,7 +43,7 @@ public class IdGen implements IdGenerator, SessionIdGenerator {
     public static String randomBase62(int length) {
         byte[] randomBytes = new byte[length];
         random.nextBytes(randomBytes);
-        return Encodes.encodeBase62(randomBytes);
+        return EncodesUtils.encodeBase62(randomBytes);
     }
 
 

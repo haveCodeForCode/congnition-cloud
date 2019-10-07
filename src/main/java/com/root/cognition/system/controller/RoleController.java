@@ -29,11 +29,11 @@ public class RoleController extends BaseController {
         this.roleService = roleService;
     }
 
-    @RequiresPermissions("sys:role:role")
-    @GetMapping("")
-    String role() {
-        return "system/role/role";
-    }
+//    @RequiresPermissions("sys:role:role")
+//    @GetMapping("")
+//    String role() {
+//        return "system/role/role";
+//    }
 
     @GetMapping("/list")
     @ResponseBody
@@ -52,14 +52,19 @@ public class RoleController extends BaseController {
     }
 
     //	@Log("编辑角色")
-    @RequiresPermissions("sys:role:edit")
-    @GetMapping("/edit/{id}")
-    String edit(@PathVariable("id") Long id, Model model) {
-        Role role = roleService.get(id);
-        model.addAttribute("role", role);
-        return "system/role/edit";
-    }
+//    @RequiresPermissions("sys:role:edit")
+//    @GetMapping("/edit/{id}")
+//    String edit(@PathVariable("id") Long id, Model model) {
+//        Role role = roleService.get(id);
+//        model.addAttribute("role", role);
+//        return "system/role/edit";
+//    }
 
+    /**
+     * 储存角色
+     * @param role
+     * @return
+     */
     //	@Log("保存角色")
     @RequiresPermissions("sys:role:add")
     @PostMapping("/save")
@@ -68,9 +73,9 @@ public class RoleController extends BaseController {
         // 根据权限存入id，更新人
         role.setCreateBy(getUserId());
         if (roleService.save(role) > 0) {
-            return ResultData.success();
+            return ResultData.result(true);
         } else {
-            return ResultData.error();
+            return ResultData.result(false);
         }
     }
 
@@ -82,9 +87,9 @@ public class RoleController extends BaseController {
         //roleId转值id
         int state = roleService.update(role);
         if (state > 0) {
-            return ResultData.success();
+            return ResultData.result(true);
         } else {
-            return ResultData.error();
+            return ResultData.result(false);
         }
     }
 
@@ -94,9 +99,9 @@ public class RoleController extends BaseController {
     @ResponseBody
     ResultData delete(Long id) {
         if (roleService.delete(id) > 0) {
-            return ResultData.success();
+            return ResultData.result(true);
         } else {
-            return ResultData.error();
+            return ResultData.result(false);
         }
     }
 
@@ -107,9 +112,9 @@ public class RoleController extends BaseController {
     ResultData batchRemove(@RequestParam("ids[]") Long[] ids) {
         int r = roleService.batchDelect(ids);
         if (r > 0) {
-            return ResultData.success();
+            return ResultData.result(true);
         }
-        return ResultData.error();
+        return ResultData.result(false);
 
     }
 }

@@ -61,7 +61,7 @@ public class RegistController extends BaseController {
     //@Log("注册用户")
     @PostMapping("/registerUser")
     @ResponseBody
-    Map<String, Object> register(UserVo userVo) {
+    ResultData register(UserVo userVo) {
         try {
             //新用户
             User user = new User();
@@ -79,13 +79,14 @@ public class RegistController extends BaseController {
             User userold = userService.getWihtLogininfo(loginInfo);
 
             if (userold != null) {
-                return ResultData.error("用户已存在");
+                return ResultData.result(false).setMsg("用户已存在");
             } else {
                 //插入很用户
                 user.preInsert();
+                SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
                 //按时间时分秒存入
-                SimpleDateFormat sim = new SimpleDateFormat("HHmmss");
-                int hoursSeconds = Integer.parseInt(sim.format(new Date()));
+                int hoursSeconds = Integer.parseInt(sdf.format(new Date()));
+                //默认用户名
                 String defaultUser = Tools.createNumCode("UR", hoursSeconds);
                 user.setLoginName(defaultUser);
                 //密码加密
@@ -100,11 +101,11 @@ public class RegistController extends BaseController {
                     randomKey = userVo.getEmail() + "random";
                 }
                 redisService.redisDel(randomKey);
-                return ResultData.success("注册成功");
+                return ResultData.result(true).setMsg("注册成功");
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return ResultData.error("注册失败");
+            return ResultData.result(false).setMsg("注册失败");
         }
 
     }
@@ -184,7 +185,7 @@ public class RegistController extends BaseController {
     @ResponseBody
     ResultData sendMobileCode(@RequestParam String mobile) {
         if (StringUtils.isEmpty(mobile)) {
-            return ResultData.error("手机号码缺失");
+            return ResultData.result(false).setMsg("手机号码缺失");
         }
 
         String randomNumber = Tools.getRandomNumber(6);
