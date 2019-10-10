@@ -2,13 +2,13 @@ package com.realm.cognitionadmin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 
-//@EnableFeignClients(basePackages = {"com.bootdo"})
-@EnableCaching
-@EnableScheduling
+/**
+ * @author 1122
+ */
+@EnableEurekaClient
 @SpringBootApplication
 public class CognitionAdminApplication {
 

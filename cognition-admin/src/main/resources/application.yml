@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: cognition-admin
+server:
+  port: 6010
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:6001/eureka/
