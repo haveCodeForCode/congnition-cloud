@@ -2,12 +2,13 @@ server:
   port: 6001
 eureka:
   instance:
-    hostname: localhost
+    hostname: cognition-server
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  environment: prod
 spring:
   application:
     name: cognition-server
