@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!-- 主服务相关设定 -->
-    <groupId>com.greatIdeas</groupId>
+    <groupId>com.cloud</groupId>
     <artifactId>cognition</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>cognition-server</module>
-        <module>cognition-admin</module>
+        <module>cognition-auth</module>
         <module>cognition-common</module>
     </modules>
 
