@@ -2,6 +2,7 @@ package com.realm.cognitionauth.entity;
 
 import com.realm.cognitioncommon.persistence.BaseEntity;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author 王睿
  * @version 2018/12/28
  */
+@Entity
 public class Role extends BaseEntity<Role> implements Serializable{
 
     private static final long serialVersionUID = 1L;

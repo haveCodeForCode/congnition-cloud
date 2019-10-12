@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User getWihtLogininfo(String loginInfo) {
-        return userDao.getWihtLogininfo(loginInfo);
+        return userDao.get(loginInfo);
     }
 
     /***
@@ -105,11 +105,11 @@ public class UserServiceImpl implements UserService {
         //声明用户相关关系变量
         UserVo userVo = new UserVo();
         //查找存放用户
-        Map<String, Object> userQuery = Query.withDelFlag();
-        userQuery.put("id", userId);
-        User user = userDao.getByEntity(userQuery);
+        User user =  userDao.getOne(userId);
         userVo.setUser(user);
         //用户信息
+
+        userInfoDao.();
         Map<String, Object> query = Query.withDelFlag();
         query.put("userId", userId);
         UserInfo userInfo = userInfoDao.getByEntity(query);

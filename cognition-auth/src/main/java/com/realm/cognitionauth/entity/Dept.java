@@ -3,6 +3,9 @@ package com.realm.cognitionauth.entity;
 
 import com.realm.cognitioncommon.persistence.BaseEntity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -10,6 +13,8 @@ import java.io.Serializable;
  *
  * @author LineInkBook
  */
+@Entity(name="Dept")
+@Table(name = "")
 public class Dept extends BaseEntity<Dept> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,6 +22,7 @@ public class Dept extends BaseEntity<Dept> implements Serializable {
     /**
      * 上级部门ID，一级部门为0
      */
+    @Column
     private Long parentId;
 
     /**

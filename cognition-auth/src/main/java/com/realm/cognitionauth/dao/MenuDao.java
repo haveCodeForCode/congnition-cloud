@@ -3,6 +3,7 @@ package com.realm.cognitionauth.dao;
 
 import com.realm.cognitionauth.entity.Menu;
 import com.realm.cognitioncommon.persistence.BaseDao;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,21 +15,7 @@ import java.util.List;
  * @author LineInkBook
  */
 @Repository("MenuDao")
-public interface MenuDao extends BaseDao<Menu> {
+public interface MenuDao extends JpaRepository<Menu,Long> {
 
-    /**
-     * 根据用户id查询用户下的菜单
-     *
-     * @param id
-     * @return
-     */
-    List<Menu> listMenuByUserId(Long id);
 
-    /**
-     * 根据用户id查询用户下的权限
-     *
-     * @param id
-     * @return
-     */
-    List<String> listUserPerms(Long id);
 }

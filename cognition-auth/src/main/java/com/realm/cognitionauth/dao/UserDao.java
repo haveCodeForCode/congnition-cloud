@@ -2,6 +2,7 @@ package com.realm.cognitionauth.dao;
 
 import com.realm.cognitionauth.entity.User;
 import com.realm.cognitioncommon.persistence.BaseDao;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
@@ -10,12 +11,6 @@ import org.springframework.stereotype.Repository;
  * @version 2018/12/24
  */
 @Repository("UserDao")
-public interface UserDao extends BaseDao<User> {
+public interface UserDao extends JpaRepository<User,Long> {
 
-    /**
-     * 根据登陆传入信息擦护心用户（手机、邮箱）
-     * @param loginInfo
-     * @return
-     */
-    User getWihtLogininfo(String loginInfo);
 }

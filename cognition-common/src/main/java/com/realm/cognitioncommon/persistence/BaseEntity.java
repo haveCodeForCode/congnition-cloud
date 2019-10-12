@@ -8,10 +8,14 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.realm.cognitioncommon.config.Constant;
 import com.realm.cognitioncommon.until.codegenerate.SnowFlake;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.data.domain.Example;
 
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
+
+//import org.hibernate.criterion.Example;
 
 
 /**
@@ -29,6 +33,7 @@ public abstract class BaseEntity<T> implements Serializable {
      *
      * @ id
      */
+    @Id
     protected Long id;
     /**
      * 创建者
@@ -78,6 +83,7 @@ public abstract class BaseEntity<T> implements Serializable {
      * @ sqlMap
      */
     protected Map<String, String> sqlMap;
+
 
     public BaseEntity(long id) {
     }
@@ -168,6 +174,10 @@ public abstract class BaseEntity<T> implements Serializable {
 
     public void setSqlMap(Map<String, String> sqlMap) {
         this.sqlMap = sqlMap;
+    }
+
+    public Example<T> setExample(T t) {
+        return Example.of(t);
     }
 
     /**

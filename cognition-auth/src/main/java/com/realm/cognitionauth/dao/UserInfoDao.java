@@ -1,7 +1,7 @@
 package com.realm.cognitionauth.dao;
 
 import com.realm.cognitionauth.entity.UserInfo;
-import com.realm.cognitioncommon.persistence.BaseDao;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
  * @version 2019/4/1
  */
 @Repository("UserInfoDao")
-public interface UserInfoDao extends BaseDao<UserInfo> {
+public interface UserInfoDao extends JpaRepository<UserInfo,Long> {
+
 
 }

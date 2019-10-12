@@ -1,15 +1,20 @@
 package com.realm.cognitionauth.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * 用户
  * @author taoya
  */
+@Entity
 public class UserRole {
     /**
      * 关联表主键
      * <p>
      * id
      */
+    @Id
     private Long id;
     /**
      * 用户主键

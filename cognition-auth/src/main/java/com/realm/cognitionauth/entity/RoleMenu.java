@@ -1,5 +1,7 @@
 package com.realm.cognitionauth.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -7,11 +9,13 @@ import java.io.Serializable;
  * @author Worry
  * @version 2019/3/18
  */
+@Entity
 public class RoleMenu implements Serializable {
 
     /**
      * 关联主键
      */
+    @Id
     private Long id;
 
     /**

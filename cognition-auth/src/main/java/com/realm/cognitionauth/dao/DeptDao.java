@@ -1,7 +1,7 @@
 package com.realm.cognitionauth.dao;
 
 import com.realm.cognitionauth.entity.Dept;
-import com.realm.cognitioncommon.persistence.BaseDao;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
@@ -13,19 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository("DeptDao")
-public interface DeptDao extends BaseDao<Dept> {
+public interface DeptDao extends JpaRepository<Dept,Long> {
 
-	/**
-	 * 查询父级部门
-	 *
-	 * @return
-	 */
-	String[] listParentDept();
 
-	/**
-	 * 查询全部相关部门
-	 *
-	 * @return
-	 */
-	String[] listAllDept();
 }
