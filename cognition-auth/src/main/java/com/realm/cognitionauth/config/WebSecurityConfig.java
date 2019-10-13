@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 网页权限配置
+ * web安全配置
  * @author Worry
  * @version 2019/10/12
  */
@@ -21,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 
     /**
      * 认证管理器bean配置
+     * 需要配置这个支持password模式
      * @return
      * @throws Exception
      */
@@ -32,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //关闭csrf
+        //关闭csrf csrf
         http.csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint((
