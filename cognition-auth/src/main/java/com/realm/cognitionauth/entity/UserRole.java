@@ -2,12 +2,14 @@ package com.realm.cognitionauth.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 用户
  * @author taoya
  */
-@Entity
+@Entity(name = "UserRole")
+@Table(name = "sys_user_role")
 public class UserRole {
     /**
      * 关联表主键

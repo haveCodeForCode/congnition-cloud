@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @author LineInkBook
  */
 @Entity(name="Dept")
-@Table(name = "")
+@Table(name = "sys_dept")
 public class Dept extends BaseEntity<Dept> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,7 +22,6 @@ public class Dept extends BaseEntity<Dept> implements Serializable {
     /**
      * 上级部门ID，一级部门为0
      */
-    @Column
     private Long parentId;
 
     /**

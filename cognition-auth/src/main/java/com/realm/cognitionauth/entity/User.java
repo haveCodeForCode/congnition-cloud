@@ -2,14 +2,17 @@ package com.realm.cognitionauth.entity;
 
 import com.realm.cognitioncommon.persistence.BaseEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 用户Entity
  * @author LineInkBook
  * @version 2018/12/24
  */
-@Entity
+@Entity(name = "User")
+@Table(name = "")
 public class User extends BaseEntity<User> {
 
     private static final long serialVersionUID = 1L;
@@ -17,7 +20,7 @@ public class User extends BaseEntity<User> {
     /**
      * 登陆账号名
      * <p>
-     * userName
+     * loginName
      */
     private String loginName;
 

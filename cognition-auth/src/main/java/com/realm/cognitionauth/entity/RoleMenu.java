@@ -1,7 +1,9 @@
 package com.realm.cognitionauth.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -9,7 +11,8 @@ import java.io.Serializable;
  * @author Worry
  * @version 2019/3/18
  */
-@Entity
+@Entity(name = "RoleMenu")
+@Table(name = "")
 public class RoleMenu implements Serializable {
 
     /**

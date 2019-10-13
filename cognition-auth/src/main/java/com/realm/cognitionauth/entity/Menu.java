@@ -4,7 +4,9 @@ package com.realm.cognitionauth.entity;
 
 import com.realm.cognitioncommon.persistence.BaseEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -12,7 +14,8 @@ import java.io.Serializable;
  *
  * @author LineInkBook
  */
-@Entity
+@Entity(name = "Menu")
+@Table(name = "sys_menu")
 public class Menu extends BaseEntity<Menu> implements Serializable {
 
     private static final long serialVersionUID = 1L;
