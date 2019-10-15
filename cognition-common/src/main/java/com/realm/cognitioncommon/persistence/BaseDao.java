@@ -20,7 +20,7 @@ public interface BaseDao<T> {
      * 获取单条数据（根据实体）
      *
      * @param params 查询条件
-     * @return entity   实体类
+     * @return domain   实体类
      */
     T getByEntity(Map<String, Object> params);
 
@@ -61,7 +61,7 @@ public interface BaseDao<T> {
      *
      * @param id 实体类的Id
      * @return 数量
-     * @see public int remove(T entity)
+     * @see public int remove(T domain)
      */
     int remove(Long id);
 
