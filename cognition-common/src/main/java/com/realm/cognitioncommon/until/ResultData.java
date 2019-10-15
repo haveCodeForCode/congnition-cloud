@@ -1,7 +1,7 @@
 package com.realm.cognitioncommon.until;
 
 
-import com.realm.cognitioncommon.config.Constant;
+import com.realm.cognitioncommon.constant.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

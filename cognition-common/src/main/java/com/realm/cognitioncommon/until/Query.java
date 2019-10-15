@@ -1,6 +1,6 @@
 package com.realm.cognitioncommon.until;
 
-import com.realm.cognitioncommon.config.Constant;
+import com.realm.cognitioncommon.constant.Constant;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

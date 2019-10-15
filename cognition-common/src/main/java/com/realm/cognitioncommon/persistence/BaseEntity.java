@@ -3,19 +3,14 @@
  */
 package com.realm.cognitioncommon.persistence;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.realm.cognitioncommon.config.Constant;
-import com.realm.cognitioncommon.until.codegenerate.SnowFlake;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.domain.Example;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
-//import org.hibernate.criterion.Example;
 
 
 /**
@@ -27,100 +22,53 @@ public abstract class BaseEntity<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 搜索值
+     */
+    private String searchValue;
 
     /**
-     * 实体编号（唯一标识）
-     *
-     * @ id
-     */
-    @Id
-    protected Long id;
-    /**
      * 创建者
-     * <p>
-     * createBy
      */
-    protected Long createBy;
+    private String createBy;
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
 
     /**
      * 更新者
-     * <p>
-     * updateBy
      */
-    protected Long updateBy;
+    private String updateBy;
 
     /**
-     * 创建日期
-     * <p>
-     * gmtCreate
+     * 更新时间
      */
-    protected Date createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
 
+    private String delFlag;
     /**
-     * 更新日期
-     * <p>
-     * UpdateTime
+     * 请求参数
      */
-    protected Date updateTime;
+    private Map<String, Object> params;
 
-    /**
-     * 删除标记（bootstrap：正常；1：删除；2：审核）
-     * <p>
-     * delFlag
-     */
-    protected String delFlag;
-
-    /**
-     * 查询标记
-     * <p>
-     * searchinfo
-     */
-    protected String searchInfo;
-
-    /**
-     * 自定义SQL（SQL标识，SQL内容）
-     *
-     * @ sqlMap
-     */
-    protected Map<String, String> sqlMap;
-
-
-    public BaseEntity(long id) {
+    public String getSearchValue() {
+        return searchValue;
     }
 
-    public BaseEntity() {
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
     }
 
-    @JsonSerialize(using = ToStringSerializer.class)
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * long从后台传到前台会精度不准确，
-     * 续将其转换成String向前台赋值
-     *
-     * @param id
-     */
-    @JsonSerialize(using = ToStringSerializer.class)
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCreateBy() {
+    public String getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Long createBy) {
+    public void setCreateBy(String createBy) {
         this.createBy = createBy;
-    }
-
-    public Long getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(Long updateBy) {
-        this.updateBy = updateBy;
     }
 
     public Date getCreateTime() {
@@ -131,6 +79,14 @@ public abstract class BaseEntity<T> implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -139,12 +95,16 @@ public abstract class BaseEntity<T> implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public String getSearchInfo() {
-        return searchInfo;
+
+    public Map<String, Object> getParams() {
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        return params;
     }
 
-    public void setSearchInfo(String searchInfo) {
-        this.searchInfo = searchInfo;
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
     }
 
     @Length(min = 1, max = 1)
@@ -172,26 +132,19 @@ public abstract class BaseEntity<T> implements Serializable {
 //		return sqlMap;
 //	}
 
-    public void setSqlMap(Map<String, String> sqlMap) {
-        this.sqlMap = sqlMap;
-    }
-
-    public Example<T> setExample(T t) {
-        return Example.of(t);
-    }
 
     /**
      * 预插入数据补充
      */
-    public void preInsert() {
-        // 不限制ID为UUID，调用setIsNewRecord()使用自定义ID
-        Long sfUserID = SnowFlake.createSFid();
-        setId(sfUserID);
-        this.updateBy = sfUserID;
-        this.createBy = sfUserID;
-        this.createTime = new Date();
-        this.updateTime = createTime;
-        this.delFlag = Constant.DEL_FLAG_NORMAL;
-    }
+//    public void preInsert() {
+//        // 不限制ID为UUID，调用setIsNewRecord()使用自定义ID
+//        Long sfUserID = SnowFlake.createSFid();
+//        setId(sfUserID);
+//        this.updateBy = sfUserID;
+//        this.createBy = sfUserID;
+//        this.createTime = new Date();
+//        this.updateTime = createTime;
+//        this.delFlag = Constant.DEL_FLAG_NORMAL;
+//    }
 
 }
