@@ -108,8 +108,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
 
         Long configId = StringUtils.isNull(config.getConfigId()) ? -1L : config.getConfigId();
         SysConfig info = sysConfigDao.checkConfigKeyUnique(config.getConfigKey());
-        if (StringUtils.isNotNull(info) && info.getConfigId().longValue() != configId.longValue())
-        {
+        if (StringUtils.isNotNull(info) && info.getConfigId().longValue() != configId.longValue()) {
             return Constants.CONFIG_KEY_NOT_UNIQUE;
         }
         return Constants.CONFIG_KEY_UNIQUE;

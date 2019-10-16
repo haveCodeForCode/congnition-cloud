@@ -2,7 +2,9 @@ package com.realm.cognitionauth.dao;
 
 
 import com.realm.cognitionauth.entity.SysDictData;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,6 +13,8 @@ import java.util.List;
  *
  * @author 1122
  */
+@Mapper
+//@Repository("SysDictDataDao")
 public interface SysDictDataDao {
     /**
      * 根据条件分页查询字典数据

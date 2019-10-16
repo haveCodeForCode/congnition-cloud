@@ -1,7 +1,9 @@
 package com.realm.cognitionauth.dao;
 
 import com.realm.cognitionauth.entity.SysUserRole;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,7 +12,9 @@ import java.util.List;
  * 
  * @author 1122
  */
-public interface SysUserRoleMapper {
+@Mapper
+//@Repository("SysUserRoleDao")
+public interface SysUserRoleDao {
     /**
      * 通过用户ID删除用户和角色关联
      * 

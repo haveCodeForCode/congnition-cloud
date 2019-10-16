@@ -2,6 +2,8 @@ package com.realm.cognitionauth.dao;
 
 
 import com.realm.cognitionauth.entity.SysNotice;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
  * 
  * @author 1122
  */
+@Mapper
+//@Repository("SysNoticeDao")
 public interface SysNoticeDao {
 
     /**

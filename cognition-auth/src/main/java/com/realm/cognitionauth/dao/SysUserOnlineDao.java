@@ -1,6 +1,9 @@
 package com.realm.cognitionauth.dao;
 
-import com.1122.system.domain.SysUserOnline;
+
+import com.realm.cognitionauth.entity.SysUserOnline;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,8 +12,9 @@ import java.util.List;
  * 
  * @author 1122
  */
-public interface SysUserOnlineMapper
-{
+@Mapper
+//@Repository("SysUserOnlineDao")
+public interface SysUserOnlineDao {
     /**
      * 通过会话序号查询信息
      * 

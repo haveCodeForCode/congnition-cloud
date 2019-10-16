@@ -2,6 +2,8 @@ package com.realm.cognitionauth.dao;
 
 
 import com.realm.cognitionauth.entity.SysDictType;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
  *
  * @author 1122
  */
+@Mapper
+//@Repository("SysDictTypeDao")
 public interface SysDictTypeDao {
     /**
      * 根据条件分页查询字典类型

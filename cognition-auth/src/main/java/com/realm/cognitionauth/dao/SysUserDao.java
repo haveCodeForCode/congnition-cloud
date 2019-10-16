@@ -1,6 +1,9 @@
 package com.realm.cognitionauth.dao;
 
-import com.1122.system.domain.SysUser;
+
+import com.realm.cognitionauth.entity.SysUser;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,8 +12,9 @@ import java.util.List;
  * 
  * @author 1122
  */
-public interface SysUserMapper
-{
+@Mapper
+//@Repository("SysUserDao")
+public interface SysUserDao {
     /**
      * 根据条件分页查询用户列表
      * 

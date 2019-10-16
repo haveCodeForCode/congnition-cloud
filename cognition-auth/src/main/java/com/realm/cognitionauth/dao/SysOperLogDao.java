@@ -1,6 +1,8 @@
 package com.realm.cognitionauth.dao;
 
 import com.realm.cognitionauth.entity.SysOperLog;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +11,8 @@ import java.util.List;
  *
  * @author 1122
  */
+@Mapper
+//@Repository("SysOperLogDao")
 public interface SysOperLogDao {
     /**
      * 新增操作日志

@@ -1,6 +1,10 @@
 package com.realm.cognitionauth.dao;
 
-import com.1122.system.domain.SysUserPost;
+
+
+import com.realm.cognitionauth.entity.SysUserPost;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,8 +13,10 @@ import java.util.List;
  * 
  * @author 1122
  */
-public interface SysUserPostMapper
-{
+@Mapper
+//@Repository("SysUserPostDao")
+public interface SysUserPostDao {
+
     /**
      * 通过用户ID删除用户和岗位关联
      * 

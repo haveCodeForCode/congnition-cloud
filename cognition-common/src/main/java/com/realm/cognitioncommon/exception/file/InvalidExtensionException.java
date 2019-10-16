@@ -1,6 +1,6 @@
 package com.realm.cognitioncommon.exception.file;
 
-import org.apache.commons.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 
 import java.util.Arrays;
 

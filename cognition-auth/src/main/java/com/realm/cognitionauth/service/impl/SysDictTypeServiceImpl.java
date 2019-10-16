@@ -88,8 +88,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @return 结果
      */
     @Override
-    public int deleteDictTypeById(Long dictId)
-    {
+    public int deleteDictTypeById(Long dictId) {
         return dictTypeDao.deleteDictTypeById(dictId);
     }
 
@@ -100,14 +99,11 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @return 结果
      */
     @Override
-    public int deleteDictTypeByIds(String ids) throws BusinessException
-    {
+    public int deleteDictTypeByIds(String ids) throws BusinessException {
         Long[] dictIds = Convert.toLongArray(ids);
-        for (Long dictId : dictIds)
-        {
+        for (Long dictId : dictIds) {
             SysDictType dictType = selectDictTypeById(dictId);
-            if (dictDataDao.countDictDataByType(dictType.getDictType()) > 0)
-            {
+            if (dictDataDao.countDictDataByType(dictType.getDictType()) > 0) {
                 throw new BusinessException(String.format("%1$s已分配,不能删除", dictType.getDictName()));
             }
         }
@@ -122,8 +118,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @return 结果
      */
     @Override
-    public int insertDictType(SysDictType dictType)
-    {
+    public int insertDictType(SysDictType dictType) {
         return dictTypeDao.insertDictType(dictType);
     }
 
@@ -148,8 +143,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @return 结果
      */
     @Override
-    public String checkDictTypeUnique(SysDictType dict)
-    {
+    public String checkDictTypeUnique(SysDictType dict) {
         Long dictId = StringUtils.isNull(dict.getDictId()) ? -1L : dict.getDictId();
         SysDictType dictType = dictTypeDao.checkDictTypeUnique(dict.getDictType());
         if (StringUtils.isNotNull(dictType) && dictType.getDictId().longValue() != dictId.longValue())
@@ -166,14 +160,12 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @return 所有字典类型
      */
     @Override
-    public List<Ztree> selectDictTree(SysDictType dictType)
-    {
+    public List<Ztree> selectDictTree(SysDictType dictType) {
         List<Ztree> ztrees = new ArrayList<Ztree>();
         List<SysDictType> dictList = dictTypeDao.selectDictTypeList(dictType);
         for (SysDictType dict : dictList)
         {
-            if (Constants.DICT_NORMAL.equals(dict.getStatus()))
-            {
+            if (Constants.DICT_NORMAL.equals(dict.getStatus())) {
                 Ztree ztree = new Ztree();
                 ztree.setId(dict.getDictId());
                 ztree.setName(transDictName(dict));
@@ -184,8 +176,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
         return ztrees;
     }
 
-    public String transDictName(SysDictType dictType)
-    {
+    public String transDictName(SysDictType dictType) {
         StringBuffer sb = new StringBuffer();
         sb.append("(" + dictType.getDictName() + ")");
         sb.append("&nbsp;&nbsp;&nbsp;" + dictType.getDictType());

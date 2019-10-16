@@ -1,6 +1,8 @@
 package com.realm.cognitionauth.dao;
 
 import com.realm.cognitionauth.entity.SysPost;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,7 +11,9 @@ import java.util.List;
  * 
  * @author 1122
  */
-public interface SysPostMapper {
+@Mapper
+//@Repository("SysPostDao")
+public interface SysPostDao {
     /**
      * 查询岗位数据集合
      * 

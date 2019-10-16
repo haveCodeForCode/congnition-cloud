@@ -1,6 +1,9 @@
 package com.realm.cognitionauth.dao;
 
-import com.1122.system.domain.SysRoleDept;
+
+import com.realm.cognitionauth.entity.SysRoleDept;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,8 +12,9 @@ import java.util.List;
  * 
  * @author 1122
  */
-public interface SysRoleDeptMapper
-{
+@Mapper
+//@Repository("SysRoleDeptDao")
+public interface SysRoleDeptDao {
     /**
      * 通过角色ID删除角色和部门关联
      * 

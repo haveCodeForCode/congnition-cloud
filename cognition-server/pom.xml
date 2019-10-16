@@ -12,7 +12,7 @@
 
     <groupId>com.realm</groupId>
     <artifactId>cognition-server</artifactId>
-    <version>0.0.1</version>
+    <version>0.1</version>
     <name>cognition-server</name>
     <packaging>jar</packaging>
 

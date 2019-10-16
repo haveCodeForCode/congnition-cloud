@@ -2,6 +2,7 @@ package com.realm.cognitioncommon.until;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
+import java.lang.management.ManagementFactory;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,63 +18,77 @@ import java.util.*;
  * @author Worry
  * @version 2019/3/14
  */
-public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
+public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
-    /**
-     * 时间串格式
-     */
+    public static String YYYY = "yyyy";
+
+    public static String YYYY_MM = "yyyy-MM";
+
+    public static String YYYY_MM_DD = "yyyy-MM-dd";
+
+    public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
+
+    public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+
     private static String[] parsePatterns = {
             "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
             "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
-            "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
+            "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"
+    };
 
     /**
-     * 格式化日期
+     * 获取当前Date型日期
      *
-     * @param date 时间
-     * @param type 类型 （列如："yyyy-MM-dd"）
-     * @return
+     * @return Date() 当前日期
      */
-    private static Date fomatDate(String date, String type) {
-        if (StringUtils.isNotBlank(date)) {
-            return null;
-        }
-        DateFormat fmt = new SimpleDateFormat(type);
-        try {
-            return fmt.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static Date getNowDate() {
+        return new Date();
     }
 
     /**
-     * 得到当前日期字符串 格式（yyyy-MM-dd）
+     * 获取当前日期, 默认格式为yyyy-MM-dd
+     *
+     * @return String
      */
     public static String getDate() {
-        return getDate("yyyy-MM-dd");
+        return dateTimeNow(YYYY_MM_DD);
     }
 
     /**
-     * 得到当前日期字符串 格式（yyyy-MM-dd）
-     * pattern可以为："yyyy-MM-dd" "HH:mm:ss" "E"
+     * 获取当前日期, 默认格式为YYYY_MM_DD_HH_MM_SS
+     *
+     * @return String
      */
-    public static String getDate(String pattern) {
-        return DateFormatUtils.format(new Date(), pattern);
+    public static final String getTime() {
+        return dateTimeNow(YYYY_MM_DD_HH_MM_SS);
     }
 
     /**
-     * 得到日期字符串 默认格式（yyyy-MM-dd） pattern可以为："yyyy-MM-dd" "HH:mm:ss" "E"
+     * 获取当前日期, 默认格式为YYYYMMDDHHMMSS
+     *
+     * @return String
      */
-    private static String formatDate(Date date, Object... pattern) {
-        String formatDate = null;
-        if (pattern != null && pattern.length > 0) {
-            formatDate = DateFormatUtils.format(date, pattern[0].toString());
-        } else {
-            formatDate = DateFormatUtils.format(date, "yyyy-MM-dd");
-        }
-        return formatDate;
+    public static final String dateTimeNow() {
+        return dateTimeNow(YYYYMMDDHHMMSS);
     }
+
+    /**
+     * 格式化时间
+     * @param format
+     * @return
+     */
+    public static final String dateTimeNow(final String format) {
+        return parseDateToStr(format, new Date());
+    }
+
+    public static final String dateTime(final Date date) {
+        return parseDateToStr(YYYY_MM_DD, date);
+    }
+
+    public static final String parseDateToStr(final String format, final Date date) {
+        return new SimpleDateFormat(format).format(date);
+    }
+
 
     /**
      * 得到日期时间字符串，转换格式（yyyy-MM-dd HH:mm:ss）
@@ -82,12 +97,6 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
         return formatDate(date, "yyyy-MM-dd HH:mm:ss");
     }
 
-    /**
-     * 得到当前时间字符串 格式（HH:mm:ss）
-     */
-    public static String getTime() {
-        return formatDate(new Date(), "HH:mm:ss");
-    }
 
     /**
      * 得到当前日期和时间字符串 格式（yyyy-MM-dd HH:mm:ss）
@@ -138,6 +147,56 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
      */
     public static String getYearMonth() {
         return formatDate(new Date(), "yyyy-MM");
+    }
+
+
+    public static final Date dateTime(final String format, final String ts) {
+        try {
+            return new SimpleDateFormat(format).parse(ts);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    /**
+     * 格式化日期
+     *
+     * @param date 时间
+     * @param type 类型 （列如："yyyy-MM-dd"）
+     * @return
+     */
+    private static Date fomatDate(String date, String type) {
+        if (StringUtils.isNotBlank(date)) {
+            return null;
+        }
+        DateFormat fmt = new SimpleDateFormat(type);
+        try {
+            return fmt.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    /**
+     * 得到当前日期字符串 格式（yyyy-MM-dd）
+     * pattern可以为："yyyy-MM-dd" "HH:mm:ss" "E"
+     */
+    public static String getDate(String pattern) {
+        return DateFormatUtils.format(new Date(), pattern);
+    }
+
+    /**
+     * 得到日期字符串 默认格式（yyyy-MM-dd） pattern可以为："yyyy-MM-dd" "HH:mm:ss" "E"
+     */
+    private static String formatDate(Date date, Object... pattern) {
+        String formatDate = null;
+        if (pattern != null && pattern.length > 0) {
+            formatDate = DateFormatUtils.format(date, pattern[0].toString());
+        } else {
+            formatDate = DateFormatUtils.format(date, "yyyy-MM-dd");
+        }
+        return formatDate;
     }
 
 
@@ -366,5 +425,13 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
             e.printStackTrace();
         }
         return date;
+    }
+
+    /**
+     * 获取服务器启动时间
+     */
+    public static Date getServerStartDate() {
+        long time = ManagementFactory.getRuntimeMXBean().getStartTime();
+        return new Date(time);
     }
 }

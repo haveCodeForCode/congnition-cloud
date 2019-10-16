@@ -68,13 +68,10 @@ public class SysDeptServiceImpl implements ISysDeptService {
         Long roleId = role.getRoleId();
         List<Ztree> ztrees = new ArrayList<Ztree>();
         List<SysDept> deptList = selectDeptList(new SysDept());
-        if (StringUtils.isNotNull(roleId))
-        {
+        if (StringUtils.isNotNull(roleId)) {
             List<String> roleDeptList = sysDeptDao.selectRoleDeptTree(roleId);
             ztrees = initZtree(deptList, roleDeptList);
-        }
-        else
-        {
+        } else {
             ztrees = initZtree(deptList);
         }
         return ztrees;
@@ -101,17 +98,14 @@ public class SysDeptServiceImpl implements ISysDeptService {
 
         List<Ztree> ztrees = new ArrayList<Ztree>();
         boolean isCheck = StringUtils.isNotNull(roleDeptList);
-        for (SysDept dept : deptList)
-        {
-            if (Constants.DEPT_NORMAL.equals(dept.getStatus()))
-            {
+        for (SysDept dept : deptList) {
+            if (Constants.DEPT_NORMAL.equals(dept.getStatus())) {
                 Ztree ztree = new Ztree();
                 ztree.setId(dept.getDeptId());
                 ztree.setpId(dept.getParentId());
                 ztree.setName(dept.getDeptName());
                 ztree.setTitle(dept.getDeptName());
-                if (isCheck)
-                {
+                if (isCheck) {
                     ztree.setChecked(roleDeptList.contains(dept.getDeptId() + dept.getDeptName()));
                 }
                 ztrees.add(ztree);
@@ -166,8 +160,7 @@ public class SysDeptServiceImpl implements ISysDeptService {
     public int insertDept(SysDept dept) {
         SysDept info = sysDeptDao.selectDeptById(dept.getParentId());
         // 如果父节点不为"正常"状态,则不允许新增子节点
-        if (!Constants.DEPT_NORMAL.equals(info.getStatus()))
-        {
+        if (!Constants.DEPT_NORMAL.equals(info.getStatus())) {
             throw new BusinessException("部门停用，不允许新增");
         }
         dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
@@ -220,12 +213,10 @@ public class SysDeptServiceImpl implements ISysDeptService {
      */
     public void updateDeptChildren(Long deptId, String newAncestors, String oldAncestors) {
         List<SysDept> children = sysDeptDao.selectChildrenDeptById(deptId);
-        for (SysDept child : children)
-        {
+        for (SysDept child : children) {
             child.setAncestors(child.getAncestors().replace(oldAncestors, newAncestors));
         }
-        if (children.size() > 0)
-        {
+        if (children.size() > 0) {
             sysDeptDao.updateDeptChildren(children);
         }
     }
@@ -251,8 +242,7 @@ public class SysDeptServiceImpl implements ISysDeptService {
     public String checkDeptNameUnique(SysDept dept) {
         Long deptId = StringUtils.isNull(dept.getDeptId()) ? -1L : dept.getDeptId();
         SysDept info = sysDeptDao.checkDeptNameUnique(dept.getDeptName(), dept.getParentId());
-        if (StringUtils.isNotNull(info) && info.getDeptId().longValue() != deptId.longValue())
-        {
+        if (StringUtils.isNotNull(info) && info.getDeptId().longValue() != deptId.longValue()) {
             return Constants.DEPT_NAME_NOT_UNIQUE;
         }
         return Constants.DEPT_NAME_UNIQUE;

@@ -1,10 +1,11 @@
 package com.realm.cognitionauth.service.impl;
 
-import com.1122.common.utils.DateUtils;
-import com.1122.common.utils.StringUtils;
-import com.1122.system.domain.SysUserOnline;
-import com.1122.system.mapper.SysUserOnlineMapper;
-import com.1122.system.service.ISysUserOnlineService;
+
+import com.realm.cognitionauth.dao.SysUserOnlineDao;
+import com.realm.cognitionauth.entity.SysUserOnline;
+import com.realm.cognitionauth.service.ISysUserOnlineService;
+import com.realm.cognitioncommon.until.DateUtils;
+import com.realm.cognitioncommon.until.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,15 @@ import java.util.List;
  * @author 1122
  */
 @Service
-public class SysUserOnlineServiceImpl implements ISysUserOnlineService
-{
+public class SysUserOnlineServiceImpl implements ISysUserOnlineService {
+
+
+    private SysUserOnlineDao userOnlineDao;
+
     @Autowired
-    private SysUserOnlineMapper userOnlineDao;
+    public void setUserOnlineDao(SysUserOnlineDao userOnlineDao) {
+        this.userOnlineDao = userOnlineDao;
+    }
 
     /**
      * 通过会话序号查询信息
@@ -29,8 +35,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
      * @return 在线用户信息
      */
     @Override
-    public SysUserOnline selectOnlineById(String sessionId)
-    {
+    public SysUserOnline selectOnlineById(String sessionId) {
         return userOnlineDao.selectOnlineById(sessionId);
     }
 
@@ -41,11 +46,9 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
      * @return 在线用户信息
      */
     @Override
-    public void deleteOnlineById(String sessionId)
-    {
+    public void deleteOnlineById(String sessionId) {
         SysUserOnline userOnline = selectOnlineById(sessionId);
-        if (StringUtils.isNotNull(userOnline))
-        {
+        if (StringUtils.isNotNull(userOnline)) {
             userOnlineDao.deleteOnlineById(sessionId);
         }
     }
@@ -57,13 +60,10 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
      * @return 在线用户信息
      */
     @Override
-    public void batchDeleteOnline(List<String> sessions)
-    {
-        for (String sessionId : sessions)
-        {
+    public void batchDeleteOnline(List<String> sessions) {
+        for (String sessionId : sessions) {
             SysUserOnline userOnline = selectOnlineById(sessionId);
-            if (StringUtils.isNotNull(userOnline))
-            {
+            if (StringUtils.isNotNull(userOnline)) {
                 userOnlineDao.deleteOnlineById(sessionId);
             }
         }
@@ -75,8 +75,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
      * @param online 会话信息
      */
     @Override
-    public void saveOnline(SysUserOnline online)
-    {
+    public void saveOnline(SysUserOnline online) {
         userOnlineDao.saveOnline(online);
     }
 
@@ -86,8 +85,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
      * @param userOnline 在线用户
      */
     @Override
-    public List<SysUserOnline> selectUserOnlineList(SysUserOnline userOnline)
-    {
+    public List<SysUserOnline> selectUserOnlineList(SysUserOnline userOnline) {
         return userOnlineDao.selectUserOnlineList(userOnline);
     }
 
@@ -97,8 +95,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
      * @param sessionId 会话ID
      */
     @Override
-    public void forceLogout(String sessionId)
-    {
+    public void forceLogout(String sessionId) {
         userOnlineDao.deleteOnlineById(sessionId);
     }
 
@@ -108,8 +105,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
      * @param expiredDate 失效日期
      */
     @Override
-    public List<SysUserOnline> selectOnlineByExpired(Date expiredDate)
-    {
+    public List<SysUserOnline> selectOnlineByExpired(Date expiredDate) {
         String lastAccessTime = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, expiredDate);
         return userOnlineDao.selectOnlineByExpired(lastAccessTime);
     }

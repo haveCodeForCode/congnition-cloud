@@ -1,6 +1,8 @@
 package com.realm.cognitionauth.dao;
 
 import com.realm.cognitionauth.entity.SysConfig;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  *
  * @author 1122
  */
+@Mapper
 public interface SysConfigDao {
     /**
      * 查询参数配置信息
