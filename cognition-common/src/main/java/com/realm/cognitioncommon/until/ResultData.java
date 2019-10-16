@@ -1,7 +1,7 @@
 package com.realm.cognitioncommon.until;
 
 
-import com.realm.cognitioncommon.constant.Constant;
+import com.realm.cognitioncommon.constant.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,8 +46,8 @@ public class ResultData {
      */
     public static ResultData result(boolean result) {
         return new ResultData().setSuccess(result).setState(result ? 1 : 0)
-                .setCode(result ? Constant.SERVER_SUCCESS : Constant.SERVER_ERROR)
-                .setMsg(result ? Constant.DEFAULT_SUCCESS_MSG : Constant.SERVER_ERROR_MSG);
+                .setCode(result ? Constants.SERVER_SUCCESS : Constants.SERVER_ERROR)
+                .setMsg(result ? Constants.DEFAULT_SUCCESS_MSG : Constants.SERVER_ERROR_MSG);
     }
 
     /**
@@ -58,7 +58,7 @@ public class ResultData {
      */
     public static ResultData result(boolean result, String msg) {
         return new ResultData().setSuccess(result).setState(result ? 1 : 0)
-                .setCode(result ? Constant.SERVER_SUCCESS : Constant.SERVER_ERROR)
+                .setCode(result ? Constants.SERVER_SUCCESS : Constants.SERVER_ERROR)
                 .setMsg(msg);
     }
 
@@ -71,8 +71,8 @@ public class ResultData {
      */
     public static ResultData result(boolean result, Object object) {
         return new ResultData().setSuccess(result).setState(result ? 1 : 0)
-                .setCode(result ? Constant.SERVER_SUCCESS : Constant.SERVER_ERROR)
-                .setMsg(result ? Constant.DEFAULT_SUCCESS_MSG : Constant.SERVER_ERROR_MSG)
+                .setCode(result ? Constants.SERVER_SUCCESS : Constants.SERVER_ERROR)
+                .setMsg(result ? Constants.DEFAULT_SUCCESS_MSG : Constants.SERVER_ERROR_MSG)
                 .setData(object);
     }
 

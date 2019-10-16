@@ -1,13 +1,13 @@
 package com.realm.cognitionauth.dao;
 
-import com.ruoyi.system.domain.SysUserOnline;
+import com.1122.system.domain.SysUserOnline;
 
 import java.util.List;
 
 /**
  * 在线用户 数据层
  * 
- * @author ruoyi
+ * @author 1122
  */
 public interface SysUserOnlineMapper
 {

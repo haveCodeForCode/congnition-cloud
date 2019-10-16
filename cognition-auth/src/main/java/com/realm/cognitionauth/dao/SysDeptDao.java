@@ -1,17 +1,16 @@
 package com.realm.cognitionauth.dao;
 
-import com.ruoyi.system.domain.SysDept;
-import org.apache.ibatis.annotations.Param;
+import com.realm.cognitionauth.entity.SysDept;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 /**
  * 部门管理 数据层
  * 
- * @author ruoyi
+ * @author 1122
  */
-public interface SysDeptMapper
-{
+public interface SysDeptDao {
     /**
      * 查询部门人数
      * 

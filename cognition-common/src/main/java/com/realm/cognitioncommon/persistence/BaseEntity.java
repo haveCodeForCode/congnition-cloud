@@ -144,7 +144,7 @@ public abstract class BaseEntity<T> implements Serializable {
 //        this.createBy = sfUserID;
 //        this.createTime = new Date();
 //        this.updateTime = createTime;
-//        this.delFlag = Constant.DEL_FLAG_NORMAL;
+//        this.delFlag = Constants.DEL_FLAG_NORMAL;
 //    }
 
 }

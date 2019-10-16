@@ -1,16 +1,16 @@
 package com.realm.cognitionauth.dao;
 
-import com.ruoyi.system.domain.SysDictType;
+
+import com.realm.cognitionauth.entity.SysDictType;
 
 import java.util.List;
 
 /**
  * 字典表 数据层
- * 
- * @author ruoyi
+ *
+ * @author 1122
  */
-public interface SysDictTypeMapper
-{
+public interface SysDictTypeDao {
     /**
      * 根据条件分页查询字典类型
      * 

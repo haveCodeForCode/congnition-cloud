@@ -1,17 +1,16 @@
 package com.realm.cognitionauth.dao;
 
-import com.ruoyi.system.domain.SysMenu;
-import org.apache.ibatis.annotations.Param;
+import com.realm.cognitionauth.entity.SysMenu;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 /**
  * 菜单表 数据层
  * 
- * @author ruoyi
+ * @author 1122
  */
-public interface SysMenuMapper
-{
+public interface SysMenuDao {
     /**
      * 查询系统所有菜单（含按钮）
      * 

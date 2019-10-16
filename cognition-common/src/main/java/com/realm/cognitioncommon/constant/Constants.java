@@ -5,7 +5,7 @@ package com.realm.cognitioncommon.constant;
  *
  * @author taoya
  */
-public class Constant {
+public class Constants {
 
     /*** Menu菜单 首字母*/
     public static String MENU_INITIALS = "MU";
@@ -61,15 +61,6 @@ public class Constant {
     public static final String STRING_ZERO = "0";
     public static final String STRING_ONE = "1";
 
-
-
-    /**
-     * 成功
-     * 失败
-     */
-    public static final String OK ="OK";
-    public static final String SUCCESS = "success";
-    public static final String FAIL = "fail";
 
     /**
      * MD5加密
@@ -249,4 +240,59 @@ public class Constant {
      */
     public static final String EMAIL_PATTERN = "^((([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+(\\.([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+)*)|((\\x22)((((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(([\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]|\\x21|[\\x23-\\x5b]|[\\x5d-\\x7e]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(\\\\([\\x01-\\x09\\x0b\\x0c\\x0d-\\x7f]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]))))*(((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(\\x22)))@((([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.)+(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.?";
 
+    /**
+     * UTF-8 字符集
+     */
+    public static final String UTF8 = "UTF-8";
+
+    /**
+     * 通用成功标识
+     */
+    public static final String SUCCESS = "0";
+
+    /**
+     * 通用失败标识
+     */
+    public static final String FAIL = "1";
+
+    /**
+     * 登录成功
+     */
+    public static final String LOGIN_SUCCESS = "Success";
+
+    /**
+     * 注销
+     */
+    public static final String LOGOUT = "Logout";
+
+    /**
+     * 登录失败
+     */
+    public static final String LOGIN_FAIL = "Error";
+
+
+    /**
+     * 当前记录起始索引
+     */
+    public static final String PAGE_NUM = "pageNum";
+
+    /**
+     * 每页显示记录数
+     */
+    public static final String PAGE_SIZE = "pageSize";
+
+    /**
+     * 排序列
+     */
+    public static final String ORDER_BY_COLUMN = "orderByColumn";
+
+    /**
+     * 排序的方向 "desc" 或者 "asc".
+     */
+    public static final String IS_ASC = "isAsc";
+
+    /**
+     * 资源映射路径 前缀
+     */
+    public static final String RESOURCE_PREFIX = "/profile";
 }

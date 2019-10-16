@@ -1,15 +1,15 @@
 package com.realm.cognitionauth.service.impl;
 
-import com.ruoyi.common.annotation.DataScope;
-import com.ruoyi.common.constant.UserConstants;
-import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.exception.BusinessException;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.security.Md5Utils;
-import com.ruoyi.system.domain.*;
-import com.ruoyi.system.mapper.*;
-import com.ruoyi.system.service.ISysConfigService;
-import com.ruoyi.system.service.ISysUserService;
+import com.1122.common.annotation.DataScope;
+import com.1122.common.constant.UserConstants;
+import com.1122.common.core.text.Convert;
+import com.1122.common.exception.BusinessException;
+import com.1122.common.utils.StringUtils;
+import com.1122.common.utils.security.Md5Utils;
+import com.1122.system.domain.*;
+import com.1122.system.mapper.*;
+import com.1122.system.service.ISysConfigService;
+import com.1122.system.service.ISysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 用户 业务层处理
  * 
- * @author ruoyi
+ * @author 1122
  */
 @Service
 public class SysUserServiceImpl implements ISysUserService

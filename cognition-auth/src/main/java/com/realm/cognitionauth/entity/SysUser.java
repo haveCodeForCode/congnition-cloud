@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 用户对象 sys_user
  * 
- * @author ruoyi
+ * @author 1122
  */
 public class SysUser extends BaseEntity {
 

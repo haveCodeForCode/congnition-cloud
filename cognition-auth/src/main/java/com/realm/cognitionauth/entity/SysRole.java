@@ -10,7 +10,7 @@ import java.util.Arrays;
 /**
  * 角色表 sys_role
  * 
- * @author ruoyi
+ * @author 1122
  */
 public class SysRole extends BaseEntity {
 

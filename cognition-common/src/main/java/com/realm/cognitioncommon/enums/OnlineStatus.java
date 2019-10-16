@@ -3,10 +3,9 @@ package com.realm.cognitioncommon.enums;
 /**
  * 用户会话
  * 
- * @author ruoyi
+ * @author 1122
  */
-public enum OnlineStatus
-{
+public enum OnlineStatus {
     /** 用户状态 */
     on_line("在线"), off_line("离线");
 

@@ -1,9 +1,9 @@
 package com.realm.cognitionauth.service.impl;
 
-import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.system.domain.SysDictData;
-import com.ruoyi.system.mapper.SysDictDataMapper;
-import com.ruoyi.system.service.ISysDictDataService;
+import com.realm.cognitionauth.dao.SysDictDataDao;
+import com.realm.cognitionauth.entity.SysDictData;
+import com.realm.cognitionauth.service.ISysDictDataService;
+import com.realm.cognitioncommon.text.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +11,19 @@ import java.util.List;
 
 /**
  * 字典 业务层处理
- * 
- * @author ruoyi
+ *
+ * @author 1122
  */
 @Service
-public class SysDictDataServiceImpl implements ISysDictDataService
-{
+public class SysDictDataServiceImpl implements ISysDictDataService {
+
+
+    private SysDictDataDao sysDictDataDao;
+
     @Autowired
-    private SysDictDataMapper dictDataMapper;
+    public void setSysDictDataDao(SysDictDataDao sysDictDataDao) {
+        this.sysDictDataDao = sysDictDataDao;
+    }
 
     /**
      * 根据条件分页查询字典数据
@@ -27,9 +32,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService
      * @return 字典数据集合信息
      */
     @Override
-    public List<SysDictData> selectDictDataList(SysDictData dictData)
-    {
-        return dictDataMapper.selectDictDataList(dictData);
+    public List<SysDictData> selectDictDataList(SysDictData dictData) {
+        return sysDictDataDao.selectDictDataList(dictData);
     }
 
     /**
@@ -39,9 +43,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService
      * @return 字典数据集合信息
      */
     @Override
-    public List<SysDictData> selectDictDataByType(String dictType)
-    {
-        return dictDataMapper.selectDictDataByType(dictType);
+    public List<SysDictData> selectDictDataByType(String dictType) {
+        return sysDictDataDao.selectDictDataByType(dictType);
     }
 
     /**
@@ -52,9 +55,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService
      * @return 字典标签
      */
     @Override
-    public String selectDictLabel(String dictType, String dictValue)
-    {
-        return dictDataMapper.selectDictLabel(dictType, dictValue);
+    public String selectDictLabel(String dictType, String dictValue) {
+        return sysDictDataDao.selectDictLabel(dictType, dictValue);
     }
 
     /**
@@ -64,9 +66,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService
      * @return 字典数据
      */
     @Override
-    public SysDictData selectDictDataById(Long dictCode)
-    {
-        return dictDataMapper.selectDictDataById(dictCode);
+    public SysDictData selectDictDataById(Long dictCode) {
+        return sysDictDataDao.selectDictDataById(dictCode);
     }
 
     /**
@@ -76,9 +77,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService
      * @return 结果
      */
     @Override
-    public int deleteDictDataById(Long dictCode)
-    {
-        return dictDataMapper.deleteDictDataById(dictCode);
+    public int deleteDictDataById(Long dictCode) {
+        return sysDictDataDao.deleteDictDataById(dictCode);
     }
 
     /**
@@ -88,9 +88,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService
      * @return 结果
      */
     @Override
-    public int deleteDictDataByIds(String ids)
-    {
-        return dictDataMapper.deleteDictDataByIds(Convert.toStrArray(ids));
+    public int deleteDictDataByIds(String ids) {
+        return sysDictDataDao.deleteDictDataByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -100,9 +99,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService
      * @return 结果
      */
     @Override
-    public int insertDictData(SysDictData dictData)
-    {
-        return dictDataMapper.insertDictData(dictData);
+    public int insertDictData(SysDictData dictData) {
+        return sysDictDataDao.insertDictData(dictData);
     }
 
     /**
@@ -112,8 +110,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService
      * @return 结果
      */
     @Override
-    public int updateDictData(SysDictData dictData)
-    {
-        return dictDataMapper.updateDictData(dictData);
+    public int updateDictData(SysDictData dictData) {
+        return sysDictDataDao.updateDictData(dictData);
     }
 }

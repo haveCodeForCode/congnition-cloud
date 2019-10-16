@@ -4,7 +4,7 @@ package com.realm.cognitionauth.entity;
 /**
  * 角色和菜单关联 sys_role_menu
  * 
- * @author ruoyi
+ * @author 1122
  */
 public class SysRoleMenu {
     /** 角色ID */

@@ -1,20 +1,20 @@
 package com.realm.cognitionauth.service.impl;
 
-import com.ruoyi.common.annotation.DataScope;
-import com.ruoyi.common.constant.UserConstants;
-import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.exception.BusinessException;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.spring.SpringUtils;
-import com.ruoyi.system.domain.SysRole;
-import com.ruoyi.system.domain.SysRoleDept;
-import com.ruoyi.system.domain.SysRoleMenu;
-import com.ruoyi.system.domain.SysUserRole;
-import com.ruoyi.system.mapper.SysRoleDeptMapper;
-import com.ruoyi.system.mapper.SysRoleMapper;
-import com.ruoyi.system.mapper.SysRoleMenuMapper;
-import com.ruoyi.system.mapper.SysUserRoleMapper;
-import com.ruoyi.system.service.ISysRoleService;
+import com.1122.common.annotation.DataScope;
+import com.1122.common.constant.UserConstants;
+import com.1122.common.core.text.Convert;
+import com.1122.common.exception.BusinessException;
+import com.1122.common.utils.StringUtils;
+import com.1122.common.utils.spring.SpringUtils;
+import com.1122.system.domain.SysRole;
+import com.1122.system.domain.SysRoleDept;
+import com.1122.system.domain.SysRoleMenu;
+import com.1122.system.domain.SysUserRole;
+import com.1122.system.mapper.SysRoleDeptMapper;
+import com.1122.system.mapper.SysRoleMapper;
+import com.1122.system.mapper.SysRoleMenuMapper;
+import com.1122.system.mapper.SysUserRoleMapper;
+import com.1122.system.service.ISysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ import java.util.*;
 /**
  * 角色 业务层处理
  * 
- * @author ruoyi
+ * @author 1122
  */
 @Service
 public class SysRoleServiceImpl implements ISysRoleService

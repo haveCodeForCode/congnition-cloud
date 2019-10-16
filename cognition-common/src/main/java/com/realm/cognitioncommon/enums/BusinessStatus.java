@@ -3,10 +3,9 @@ package com.realm.cognitioncommon.enums;
 /**
  * 操作状态
  * 
- * @author ruoyi
+ * @author 1122
  */
-public enum BusinessStatus
-{
+public enum BusinessStatus {
     /**
      * 成功
      */

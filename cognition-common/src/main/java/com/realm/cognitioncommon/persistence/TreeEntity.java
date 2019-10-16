@@ -3,10 +3,10 @@ package com.realm.cognitioncommon.persistence;
 /**
  * Tree基类
  * 
- * @author ruoyi
+ * @author 1122
  */
-public class TreeEntity extends BaseEntity
-{
+public class TreeEntity extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
     /** 父菜单名称 */

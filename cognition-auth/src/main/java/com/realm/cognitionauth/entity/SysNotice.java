@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 /**
  * 通知公告表 sys_notice
  * 
- * @author ruoyi
+ * @author 1122
  */
 public class SysNotice extends BaseEntity {
 

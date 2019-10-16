@@ -1,9 +1,10 @@
 package com.realm.cognitionauth.service.impl;
 
-import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.system.domain.SysLogininfor;
-import com.ruoyi.system.mapper.SysLogininforMapper;
-import com.ruoyi.system.service.ISysLogininforService;
+
+import com.realm.cognitionauth.dao.SysLogininforDao;
+import com.realm.cognitionauth.entity.SysLogininfor;
+import com.realm.cognitionauth.service.ISysLogininforService;
+import com.realm.cognitioncommon.text.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,19 @@ import java.util.List;
 
 /**
  * 系统访问日志情况信息 服务层处理
- * 
- * @author ruoyi
+ *
+ * @author 1122
  */
 @Service
-public class SysLogininforServiceImpl implements ISysLogininforService
-{
+public class SysLogininforServiceImpl implements ISysLogininforService {
+
+
+    private SysLogininforDao logininforDao;
 
     @Autowired
-    private SysLogininforMapper logininforMapper;
+    public void setLogininforMapper(SysLogininforDao logininforDao) {
+        this.logininforDao = logininforDao;
+    }
 
     /**
      * 新增系统登录日志
@@ -27,9 +32,8 @@ public class SysLogininforServiceImpl implements ISysLogininforService
      * @param logininfor 访问日志对象
      */
     @Override
-    public void insertLogininfor(SysLogininfor logininfor)
-    {
-        logininforMapper.insertLogininfor(logininfor);
+    public void insertLogininfor(SysLogininfor logininfor) {
+        logininforDao.insertLogininfor(logininfor);
     }
 
     /**
@@ -39,9 +43,8 @@ public class SysLogininforServiceImpl implements ISysLogininforService
      * @return 登录记录集合
      */
     @Override
-    public List<SysLogininfor> selectLogininforList(SysLogininfor logininfor)
-    {
-        return logininforMapper.selectLogininforList(logininfor);
+    public List<SysLogininfor> selectLogininforList(SysLogininfor logininfor) {
+        return logininforDao.selectLogininforList(logininfor);
     }
 
     /**
@@ -51,17 +54,15 @@ public class SysLogininforServiceImpl implements ISysLogininforService
      * @return
      */
     @Override
-    public int deleteLogininforByIds(String ids)
-    {
-        return logininforMapper.deleteLogininforByIds(Convert.toStrArray(ids));
+    public int deleteLogininforByIds(String ids) {
+        return logininforDao.deleteLogininforByIds(Convert.toStrArray(ids));
     }
 
     /**
      * 清空系统登录日志
      */
     @Override
-    public void cleanLogininfor()
-    {
-        logininforMapper.cleanLogininfor();
+    public void cleanLogininfor() {
+        logininforDao.cleanLogininfor();
     }
 }

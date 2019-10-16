@@ -1,17 +1,17 @@
 package com.realm.cognitionauth.dao;
 
-import com.ruoyi.system.domain.SysDictData;
-import org.apache.ibatis.annotations.Param;
+
+import com.realm.cognitionauth.entity.SysDictData;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 /**
  * 字典表 数据层
- * 
- * @author ruoyi
+ *
+ * @author 1122
  */
-public interface SysDictDataMapper
-{
+public interface SysDictDataDao {
     /**
      * 根据条件分页查询字典数据
      * 

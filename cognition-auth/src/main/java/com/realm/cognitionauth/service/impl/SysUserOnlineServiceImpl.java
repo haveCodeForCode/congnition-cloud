@@ -1,10 +1,10 @@
 package com.realm.cognitionauth.service.impl;
 
-import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.mapper.SysUserOnlineMapper;
-import com.ruoyi.system.service.ISysUserOnlineService;
+import com.1122.common.utils.DateUtils;
+import com.1122.common.utils.StringUtils;
+import com.1122.system.domain.SysUserOnline;
+import com.1122.system.mapper.SysUserOnlineMapper;
+import com.1122.system.service.ISysUserOnlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 在线用户 服务层处理
  * 
- * @author ruoyi
+ * @author 1122
  */
 @Service
 public class SysUserOnlineServiceImpl implements ISysUserOnlineService

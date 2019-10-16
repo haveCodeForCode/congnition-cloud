@@ -1,7 +1,7 @@
 package com.realm.cognitionauth.entity;
 
 import com.realm.cognitioncommon.annotation.Excel;
-import com.realm.cognitioncommon.constant.Constant;
+import com.realm.cognitioncommon.constant.Constants;
 import com.realm.cognitioncommon.persistence.BaseEntity;
 
 import javax.validation.constraints.NotBlank;
@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 /**
  * 字典数据表 sys_dict_data
  * 
- * @author ruoyi
+ * @author 1122
  */
 public class SysDictData extends BaseEntity {
 
@@ -116,7 +116,7 @@ public class SysDictData extends BaseEntity {
     }
 
     public boolean getDefault() {
-        return Constant.YES.equals(this.isDefault);
+        return Constants.YES.equals(this.isDefault);
     }
 
     public String getIsDefault()

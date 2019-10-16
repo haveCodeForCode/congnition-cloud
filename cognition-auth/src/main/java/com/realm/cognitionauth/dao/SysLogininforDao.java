@@ -1,16 +1,17 @@
 package com.realm.cognitionauth.dao;
 
-import com.ruoyi.system.domain.SysLogininfor;
+
+import com.realm.cognitionauth.entity.SysLogininfor;
 
 import java.util.List;
 
 /**
  * 系统访问日志情况信息 数据层
- * 
- * @author ruoyi
+ *
+ * @author 1122
  */
-public interface SysLogininforMapper
-{
+public interface SysLogininforDao {
+
     /**
      * 新增系统登录日志
      * 

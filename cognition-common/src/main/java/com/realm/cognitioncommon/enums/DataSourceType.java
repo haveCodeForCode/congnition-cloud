@@ -3,10 +3,9 @@ package com.realm.cognitioncommon.enums;
 /**
  * 数据源
  * 
- * @author ruoyi
+ * @author 1122
  */
-public enum DataSourceType
-{
+public enum DataSourceType {
     /**
      * 主库
      */

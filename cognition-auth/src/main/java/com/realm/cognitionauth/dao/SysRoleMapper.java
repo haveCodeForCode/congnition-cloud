@@ -1,13 +1,13 @@
 package com.realm.cognitionauth.dao;
 
-import com.ruoyi.system.domain.SysRole;
+import com.1122.system.domain.SysRole;
 
 import java.util.List;
 
 /**
  * 角色表 数据层
  * 
- * @author ruoyi
+ * @author 1122
  */
 public interface SysRoleMapper
 {

@@ -1,16 +1,15 @@
 package com.realm.cognitionauth.dao;
 
-import com.ruoyi.system.domain.SysPost;
+import com.realm.cognitionauth.entity.SysPost;
 
 import java.util.List;
 
 /**
  * 岗位信息 数据层
  * 
- * @author ruoyi
+ * @author 1122
  */
-public interface SysPostMapper
-{
+public interface SysPostMapper {
     /**
      * 查询岗位数据集合
      * 

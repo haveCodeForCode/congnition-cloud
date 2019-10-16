@@ -1,13 +1,11 @@
 package com.realm.cognitionauth.service.impl;
 
+import com.realm.cognitionauth.dao.SysConfigDao;
 import com.realm.cognitionauth.entity.SysConfig;
 import com.realm.cognitionauth.service.ISysConfigService;
-import com.ruoyi.common.constant.UserConstants;
-import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.domain.SysConfig;
-import com.ruoyi.system.mapper.SysConfigMapper;
-import com.ruoyi.system.service.ISysConfigService;
+import com.realm.cognitioncommon.constant.Constants;
+import com.realm.cognitioncommon.text.Convert;
+import com.realm.cognitioncommon.until.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +14,17 @@ import java.util.List;
 /**
  * 参数配置 服务层实现
  * 
- * @author ruoyi
+ * @author 1122
  */
 @Service
 public class SysConfigServiceImpl implements ISysConfigService {
 
+    private SysConfigDao sysConfigDao;
+
     @Autowired
-    private SysConfigMapper configMapper;
+    public void setSysConfigDao(SysConfigDao sysConfigDao) {
+        this.sysConfigDao = sysConfigDao;
+    }
 
     /**
      * 查询参数配置信息
@@ -34,7 +36,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
     public SysConfig selectConfigById(Long configId) {
         SysConfig config = new SysConfig();
         config.setConfigId(configId);
-        return configMapper.selectConfig(config);
+        return sysConfigDao.selectConfig(config);
     }
 
     /**
@@ -47,7 +49,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
     public String selectConfigByKey(String configKey) {
         SysConfig config = new SysConfig();
         config.setConfigKey(configKey);
-        SysConfig retConfig = configMapper.selectConfig(config);
+        SysConfig retConfig = sysConfigDao.selectConfig(config);
         return StringUtils.isNotNull(retConfig) ? retConfig.getConfigValue() : "";
     }
 
@@ -58,9 +60,8 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @return 参数配置集合
      */
     @Override
-    public List<SysConfig> selectConfigList(SysConfig config)
-    {
-        return configMapper.selectConfigList(config);
+    public List<SysConfig> selectConfigList(SysConfig config) {
+        return sysConfigDao.selectConfigList(config);
     }
 
     /**
@@ -70,9 +71,8 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @return 结果
      */
     @Override
-    public int insertConfig(SysConfig config)
-    {
-        return configMapper.insertConfig(config);
+    public int insertConfig(SysConfig config) {
+        return sysConfigDao.insertConfig(config);
     }
 
     /**
@@ -82,9 +82,8 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @return 结果
      */
     @Override
-    public int updateConfig(SysConfig config)
-    {
-        return configMapper.updateConfig(config);
+    public int updateConfig(SysConfig config) {
+        return sysConfigDao.updateConfig(config);
     }
 
     /**
@@ -94,9 +93,8 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @return 结果
      */
     @Override
-    public int deleteConfigByIds(String ids)
-    {
-        return configMapper.deleteConfigByIds(Convert.toStrArray(ids));
+    public int deleteConfigByIds(String ids) {
+        return sysConfigDao.deleteConfigByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -106,14 +104,14 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @return 结果
      */
     @Override
-    public String checkConfigKeyUnique(SysConfig config)
-    {
+    public String checkConfigKeyUnique(SysConfig config) {
+
         Long configId = StringUtils.isNull(config.getConfigId()) ? -1L : config.getConfigId();
-        SysConfig info = configMapper.checkConfigKeyUnique(config.getConfigKey());
+        SysConfig info = sysConfigDao.checkConfigKeyUnique(config.getConfigKey());
         if (StringUtils.isNotNull(info) && info.getConfigId().longValue() != configId.longValue())
         {
-            return UserConstants.CONFIG_KEY_NOT_UNIQUE;
+            return Constants.CONFIG_KEY_NOT_UNIQUE;
         }
-        return UserConstants.CONFIG_KEY_UNIQUE;
+        return Constants.CONFIG_KEY_UNIQUE;
     }
 }

@@ -1,16 +1,16 @@
 package com.realm.cognitionauth.dao;
 
-import com.ruoyi.system.domain.SysRoleMenu;
+
+import com.realm.cognitionauth.entity.SysRoleMenu;
 
 import java.util.List;
 
 /**
  * 角色与菜单关联表 数据层
- * 
- * @author ruoyi
+ *
+ * @author 1122
  */
-public interface SysRoleMenuMapper
-{
+public interface SysRoleMenuDao {
     /**
      * 通过角色ID删除角色和菜单关联
      * 

@@ -3,7 +3,7 @@ package com.realm.cognitioncommon.enums;
 /**
  * 业务操作类型
  * 
- * @author ruoyi
+ * @author 1122
  */
 public enum BusinessType {
 

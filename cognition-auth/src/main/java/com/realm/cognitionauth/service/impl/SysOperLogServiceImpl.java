@@ -3,22 +3,28 @@ package com.realm.cognitionauth.service.impl;
 import com.realm.cognitionauth.dao.SysOperLogDao;
 import com.realm.cognitionauth.entity.SysOperLog;
 import com.realm.cognitionauth.service.ISysOperLogService;
-import com.ruoyi.common.core.text.Convert;
+import com.realm.cognitioncommon.text.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 /**
  * 操作日志 服务层处理
  *
- * @author ruoyi
+ * @author 1122
  */
 @Service
 public class SysOperLogServiceImpl implements ISysOperLogService {
 
-    @Autowired
+
     private SysOperLogDao sysOperLogDao;
+
+    @Autowired
+    public void setSysOperLogDao(SysOperLogDao sysOperLogDao) {
+        this.sysOperLogDao = sysOperLogDao;
+    }
 
     /**
      * 新增操作日志

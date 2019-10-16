@@ -4,7 +4,7 @@ package com.realm.cognitionauth.entity;
 /**
  * 角色和部门关联 sys_role_dept
  * 
- * @author ruoyi
+ * @author 1122
  */
 public class SysRoleDept {
 

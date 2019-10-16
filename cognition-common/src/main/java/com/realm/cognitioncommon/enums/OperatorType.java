@@ -3,10 +3,9 @@ package com.realm.cognitioncommon.enums;
 /**
  * 操作人类别
  * 
- * @author ruoyi
+ * @author 1122
  */
-public enum OperatorType
-{
+public enum OperatorType {
     /**
      * 其它
      */

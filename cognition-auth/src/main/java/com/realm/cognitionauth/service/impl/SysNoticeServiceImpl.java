@@ -3,16 +3,16 @@ package com.realm.cognitionauth.service.impl;
 import com.realm.cognitionauth.dao.SysNoticeDao;
 import com.realm.cognitionauth.entity.SysNotice;
 import com.realm.cognitionauth.service.ISysNoticeService;
+import com.realm.cognitioncommon.text.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Convert;
 import java.util.List;
 
 /**
  * 公告 服务层实现
  *
- * @author ruoyi
+ * @author 1122
  * @date 2018-06-25
  */
 @Service
