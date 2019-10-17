@@ -13,7 +13,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysDictTypeDao")
+@Repository("SysDictTypeDao")
 public interface SysDictTypeDao {
     /**
      * 根据条件分页查询字典类型

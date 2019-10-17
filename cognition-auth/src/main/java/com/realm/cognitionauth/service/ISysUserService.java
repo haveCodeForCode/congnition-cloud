@@ -1,6 +1,7 @@
 package com.realm.cognitionauth.service;
 
 import com.realm.cognitionauth.entity.SysUser;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -42,6 +43,13 @@ public interface ISysUserService {
      */
     public SysUser selectUserByLoginName(String userName);
 
+    /**
+     * 根据id获取用户详细内容
+     *
+     * @param UserId
+     * @return
+     */
+    public UserDetails selectUserDetailsByLoginId(String UserId);
     /**
      * 通过手机号码查询用户
      *

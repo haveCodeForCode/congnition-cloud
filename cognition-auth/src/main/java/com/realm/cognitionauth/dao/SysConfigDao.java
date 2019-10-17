@@ -12,6 +12,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
+@Repository("SysConfigDao")
 public interface SysConfigDao {
     /**
      * 查询参数配置信息

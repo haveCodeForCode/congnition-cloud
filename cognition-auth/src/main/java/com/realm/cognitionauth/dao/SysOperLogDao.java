@@ -12,7 +12,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysOperLogDao")
+@Repository("SysOperLogDao")
 public interface SysOperLogDao {
     /**
      * 新增操作日志

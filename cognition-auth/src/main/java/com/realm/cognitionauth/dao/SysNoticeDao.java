@@ -13,7 +13,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysNoticeDao")
+@Repository("SysNoticeDao")
 public interface SysNoticeDao {
 
     /**

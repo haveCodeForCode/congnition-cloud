@@ -13,7 +13,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysDeptDao")
+@Repository("SysDeptDao")
 public interface SysDeptDao {
     /**
      * 查询部门人数

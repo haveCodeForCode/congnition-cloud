@@ -80,8 +80,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
-    public List<SysUser> selectUserList(SysUser user)
-    {
+    public List<SysUser> selectUserList(SysUser user) {
         return sysUserDao.selectUserList(user);
     }
 
@@ -105,8 +104,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
-    public List<SysUser> selectUnallocatedList(SysUser user)
-    {
+    public List<SysUser> selectUnallocatedList(SysUser user) {
         return sysUserDao.selectUnallocatedList(user);
     }
 
@@ -117,8 +115,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * @return 用户对象信息
      */
     @Override
-    public SysUser selectUserByLoginName(String userName)
-    {
+    public SysUser selectUserByLoginName(String userName) {
         return sysUserDao.selectUserByLoginName(userName);
     }
 
@@ -129,8 +126,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * @return 用户对象信息
      */
     @Override
-    public SysUser selectUserByPhoneNumber(String phoneNumber)
-    {
+    public SysUser selectUserByPhoneNumber(String phoneNumber) {
         return sysUserDao.selectUserByPhoneNumber(phoneNumber);
     }
 

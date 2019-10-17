@@ -13,7 +13,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysRoleDeptDao")
+@Repository("SysRoleDeptDao")
 public interface SysRoleDeptDao {
     /**
      * 通过角色ID删除角色和部门关联

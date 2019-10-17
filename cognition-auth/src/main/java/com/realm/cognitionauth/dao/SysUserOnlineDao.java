@@ -13,7 +13,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysUserOnlineDao")
+@Repository("SysUserOnlineDao")
 public interface SysUserOnlineDao {
     /**
      * 通过会话序号查询信息

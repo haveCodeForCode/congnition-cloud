@@ -14,7 +14,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysDictDataDao")
+@Repository("SysDictDataDao")
 public interface SysDictDataDao {
     /**
      * 根据条件分页查询字典数据

@@ -12,7 +12,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysPostDao")
+@Repository("SysPostDao")
 public interface SysPostDao {
     /**
      * 查询岗位数据集合

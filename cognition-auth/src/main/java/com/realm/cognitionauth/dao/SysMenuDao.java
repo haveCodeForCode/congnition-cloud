@@ -13,7 +13,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysMenuDao")
+@Repository("SysMenuDao")
 public interface SysMenuDao {
     /**
      * 查询系统所有菜单（含按钮）

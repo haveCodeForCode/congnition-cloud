@@ -13,7 +13,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysUserDao")
+@Repository("SysUserDao")
 public interface SysUserDao {
     /**
      * 根据条件分页查询用户列表

@@ -13,7 +13,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysRoleDao")
+@Repository("SysRoleDao")
 public interface SysRoleDao {
     /**
      * 根据条件分页查询角色数据

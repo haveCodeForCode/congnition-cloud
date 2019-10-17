@@ -13,7 +13,7 @@ import java.util.List;
  * @author 1122
  */
 @Mapper
-//@Repository("SysRoleMenuDao")
+@Repository("SysRoleMenuDao")
 public interface SysRoleMenuDao {
     /**
      * 通过角色ID删除角色和菜单关联
