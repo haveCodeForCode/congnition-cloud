@@ -1,7 +1,5 @@
-package com.realm.cognitionauth.config;
+package com.realm.cognitionsystem.config;
 
-import com.realm.cognitionauth.dao.OauthClientDetailsDao;
-import com.realm.cognitionauth.entity.OauthClientDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -10,7 +8,6 @@ import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 
 /**
  * 客户端详情信息，客户端详情信息在这里进行初始化，通过数据库来存储调取详情信息
