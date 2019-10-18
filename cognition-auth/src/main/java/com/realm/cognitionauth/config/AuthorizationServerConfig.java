@@ -1,4 +1,4 @@
-package com.realm.cognitionsystem.config;
+package com.realm.cognitionauth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

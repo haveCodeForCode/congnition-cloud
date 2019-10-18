@@ -1,17 +1,18 @@
 package com.realm.cognitionauth.entity;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.management.relation.Role;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Worry
  * @version 2019/10/18
  */
-public class UserDetail implements UserDetails {
+public class UserAuthDetails implements UserDetails {
 
     /**
      * 用户名
@@ -23,10 +24,14 @@ public class UserDetail implements UserDetails {
      */
     private String password;
 
+    /**
+     * 授权信息
+     */
+    private List<GrantedAuthority> grantedAuthorityList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return grantedAuthorityList;
     }
 
     @Override
@@ -65,5 +70,13 @@ public class UserDetail implements UserDetails {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<GrantedAuthority> getGrantedAuthorityList() {
+        return grantedAuthorityList;
+    }
+
+    public void setGrantedAuthorityList(List<GrantedAuthority> grantedAuthorityList) {
+        this.grantedAuthorityList = grantedAuthorityList;
     }
 }

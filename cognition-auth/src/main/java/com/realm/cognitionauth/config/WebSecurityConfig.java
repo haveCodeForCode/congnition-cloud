@@ -1,7 +1,7 @@
 package com.realm.cognitionauth.config;
 
 
-import com.realm.cognitionauth.service.UserServiceDetail;
+import com.realm.cognitionauth.service.UserServiceDetailImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,11 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    private UserServiceDetail userServiceDetail;
+    private UserServiceDetailImpl userServiceDetailImpl;
 
     @Autowired
-    public void setUserService(UserServiceDetail userServiceDetail) {
-        this.userServiceDetail = userServiceDetail;
+    public void setUserService(UserServiceDetailImpl userServiceDetailImpl) {
+        this.userServiceDetailImpl = userServiceDetailImpl;
     }
 
     /**
@@ -63,6 +63,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userServiceDetail).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userServiceDetailImpl).passwordEncoder(new BCryptPasswordEncoder());
     }
 }

@@ -12,6 +12,8 @@
         <module>cognition-server</module>
         <module>cognition-auth</module>
         <module>cognition-common</module>
+        <module>cognition-system</module>
+        <module>cognition-zull</module>
     </modules>
 
     <properties>

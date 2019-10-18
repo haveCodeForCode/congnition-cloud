@@ -1,5 +1,6 @@
-package com.realm.cognitionsystem.config;
+package com.realm.cognitionauth.config;
 
+import com.realm.cognitionauth.entity.OauthClientDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -22,36 +23,40 @@ import javax.annotation.Resource;
  */
 @Service
 public class ClientDetailServiceImpl implements ClientDetailsService {
-
-    @Resource
-    private OauthClientDetailsDao oauthClientDetailsDao;
-
     @Override
     public ClientDetails loadClientByClientId(String s) throws ClientRegistrationException {
-        OauthClientDetails oauthClientDetails= oauthClientDetailsDao.getOauthClientDetailsByClientId(s);
-        BaseClientDetails clientDetails = new BaseClientDetails();
-        //客户端(client)id
-        clientDetails.setClientId(oauthClientDetails.getClientId());
-        //客户端所能访问的资源id集合
-//        clientDetails.setResourceIds(Arrays.asList(oauthClientDetails.getResourceIds().split(",")));
-        //客户端(client)的访问密匙
-        clientDetails.setClientSecret(new BCryptPasswordEncoder().encode(oauthClientDetails.getClientSecret()));
-        //客户端支持的grant_type授权类型
-//        clientDetails.setAuthorizedGrantTypes(Arrays.asList(oauthClientDetails.getAuthorizedGrantTypes().split(",")));
-        //客户端申请的权限范围
-//        clientDetails.setScope(Arrays.asList(oauthClientDetails.getScope().split(",")));
-
-        Integer accessTokenValidity = oauthClientDetails.getAccessTokenValidity();
-        if (accessTokenValidity != null && accessTokenValidity > 0) {
-            //设置token的有效期，不设置默认12小时
-            clientDetails.setAccessTokenValiditySeconds(accessTokenValidity);
-        }
-        Integer refreshTokenValidity = oauthClientDetails.getRefreshTokenValidity();
-        if (refreshTokenValidity != null && refreshTokenValidity > 0) {
-            //设置刷新token的有效期，不设置默认30天
-            clientDetails.setRefreshTokenValiditySeconds(refreshTokenValidity);
-        }
-        System.err.println("clientId是：" + s);
-        return clientDetails;
+        return null;
     }
+
+//    @Resource
+//    private OauthClientDetailsDao oauthClientDetailsDao;
+
+//    @Override
+//    public ClientDetails loadClientByClientId(String s) throws ClientRegistrationException {
+//        OauthClientDetails oauthClientDetails= oauthClientDetailsDao.getOauthClientDetailsByClientId(s);
+//        BaseClientDetails clientDetails = new BaseClientDetails();
+//        //客户端(client)id
+//        clientDetails.setClientId(oauthClientDetails.getClientId());
+//        //客户端所能访问的资源id集合
+////        clientDetails.setResourceIds(Arrays.asList(oauthClientDetails.getResourceIds().split(",")));
+//        //客户端(client)的访问密匙
+//        clientDetails.setClientSecret(new BCryptPasswordEncoder().encode(oauthClientDetails.getClientSecret()));
+//        //客户端支持的grant_type授权类型
+////        clientDetails.setAuthorizedGrantTypes(Arrays.asList(oauthClientDetails.getAuthorizedGrantTypes().split(",")));
+//        //客户端申请的权限范围
+////        clientDetails.setScope(Arrays.asList(oauthClientDetails.getScope().split(",")));
+//
+//        Integer accessTokenValidity = oauthClientDetails.getAccessTokenValidity();
+//        if (accessTokenValidity != null && accessTokenValidity > 0) {
+//            //设置token的有效期，不设置默认12小时
+//            clientDetails.setAccessTokenValiditySeconds(accessTokenValidity);
+//        }
+//        Integer refreshTokenValidity = oauthClientDetails.getRefreshTokenValidity();
+//        if (refreshTokenValidity != null && refreshTokenValidity > 0) {
+//            //设置刷新token的有效期，不设置默认30天
+//            clientDetails.setRefreshTokenValiditySeconds(refreshTokenValidity);
+//        }
+//        System.err.println("clientId是：" + s);
+//        return clientDetails;
+//    }
 }
