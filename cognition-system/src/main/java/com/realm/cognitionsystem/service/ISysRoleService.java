@@ -2,6 +2,7 @@ package com.realm.cognitionsystem.service;
 
 import com.realm.cognitionsystem.entity.SysRole;
 import com.realm.cognitionsystem.entity.SysUserRole;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
  * 
  * @author 1122
  */
+@Service
 public interface ISysRoleService {
 
     /**

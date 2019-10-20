@@ -2,6 +2,7 @@ package com.realm.cognitionsystem.service;
 
 import com.realm.cognitionsystem.entity.SysDictType;
 import com.realm.cognitioncommon.persistence.Ztree;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * 
  * @author 1122
  */
+@Service
 public interface ISysDictTypeService {
 
     /**

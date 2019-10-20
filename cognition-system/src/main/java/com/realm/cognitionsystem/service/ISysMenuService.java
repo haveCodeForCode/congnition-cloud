@@ -4,6 +4,7 @@ import com.realm.cognitionsystem.entity.SysMenu;
 import com.realm.cognitionsystem.entity.SysRole;
 import com.realm.cognitionsystem.entity.SysUser;
 import com.realm.cognitioncommon.persistence.Ztree;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Set;
  * 
  * @author 1122
  */
+@Service
 public interface ISysMenuService {
     /**
      * 根据用户ID查询菜单

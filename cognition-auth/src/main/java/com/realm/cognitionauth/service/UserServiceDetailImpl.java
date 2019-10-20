@@ -5,6 +5,7 @@ import com.realm.cognitionsystem.entity.SysRole;
 import com.realm.cognitionsystem.entity.SysUser;
 import com.realm.cognitionsystem.service.ISysRoleService;
 import com.realm.cognitionsystem.service.ISysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +28,7 @@ public class UserServiceDetailImpl implements UserDetailsService {
 
     private ISysRoleService iSysRoleService;
 
-    @Resource
+    @Autowired
     public void setiSysUserService(ISysUserService iSysUserService) {
         this.iSysUserService = iSysUserService;
     }

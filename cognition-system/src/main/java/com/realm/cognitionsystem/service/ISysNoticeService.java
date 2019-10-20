@@ -1,6 +1,7 @@
 package com.realm.cognitionsystem.service;
 
 import com.realm.cognitionsystem.entity.SysNotice;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * 
  * @author 1122
  */
+@Service
 public interface ISysNoticeService {
     /**
      * 查询公告信息

@@ -1,7 +1,6 @@
 package com.realm.cognitionsystem.service;
 
 import com.realm.cognitionsystem.entity.SysUser;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

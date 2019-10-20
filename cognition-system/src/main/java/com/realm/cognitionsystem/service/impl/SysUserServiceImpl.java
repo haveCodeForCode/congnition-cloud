@@ -385,8 +385,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * @return 结果
      */
     @Override
-    public String selectUserPostGroup(Long userId)
-    {
+    public String selectUserPostGroup(Long userId) {
         List<SysPost> list = sysPostDao.selectPostsByUserId(userId);
         StringBuffer idsStr = new StringBuffer();
         for (SysPost post : list) {

@@ -31,6 +31,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     private ClientDetailServiceImpl clientDetailService;
 
+    private final AuthenticationManager authenticationManager;
+
+    @Autowired
+    public AuthorizationServerConfig(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
     @Autowired
     public void setClientDetailService(ClientDetailServiceImpl clientDetailService) {
         this.clientDetailService = clientDetailService;
@@ -55,8 +62,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         //return new JdbcTokenStore(dataSource);
     }
 
-    @Resource
-    private AuthenticationManager authenticationManager;
 
     /**
      * 客服验证设置

@@ -2,6 +2,7 @@ package com.realm.cognitionsystem.service;
 
 
 import com.realm.cognitionsystem.entity.SysUserOnline;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * 
  * @author 1122
  */
+@Service
 public interface ISysUserOnlineService {
     /**
      * 通过会话序号查询信息

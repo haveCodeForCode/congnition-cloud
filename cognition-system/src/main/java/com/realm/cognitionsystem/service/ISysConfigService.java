@@ -1,6 +1,8 @@
 package com.realm.cognitionsystem.service;
 
 import com.realm.cognitionsystem.entity.SysConfig;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  *
  * @author 1122
  */
+@Repository
 public interface ISysConfigService {
     /**
      * 查询参数配置信息
