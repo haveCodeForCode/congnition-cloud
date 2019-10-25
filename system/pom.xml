@@ -20,6 +20,10 @@
     </properties>
 
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>com.</groupId>-->
+            <!--<artifactId></artifactId>-->
+        <!--</dependency>-->
         <!--项目框架实体类-->
         <dependency>
             <groupId>com.cognition.cloud</groupId>
